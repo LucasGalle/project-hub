@@ -1,11 +1,12 @@
 # Project status
 
-**Last updated:** 2026-10-18 · **Fase:** M1 — voortgangsdashboard
+**Last updated:** 2026-10-18 · **Fase:** M2 — skelet met demodata (nog te starten)
 
 ## Nu
 
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
-- M1: voortgangsdashboard gebouwd en getest (`dashboard/`); gepubliceerd als Cloudflare Worker `project-hub` (builds geslaagd op GitHub); wacht op bevestiging van Lucas dat de pagina correct toont, en op het adres.
+- M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
+- Volgende: M2, de schermen van het design getrouw omzetten (PH-DEC-017).
 
 ## Wacht op Lucas
 
@@ -19,7 +20,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 | ID | Milestone | Status |
 |---|---|---|
 | M0 | Dossier, flows en architectuur | DONE |
-| M1 | Stackkeuze + voortgangsdashboard | IN_PROGRESS (stack beslist) |
+| M1 | Stackkeuze + voortgangsdashboard | DONE |
 | M2–M8 | zie `12-roadmap/milestone-map.md` | TODO |
 
 ## Aangemaakte resources
@@ -33,6 +34,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-18 — M1 afgerond; dashboard live en bevestigd.
 - 2026-10-18 — Dashboard live via Cloudflare Worker `project-hub`; vereiste PH-DEC-017 (getrouwe kopie van het design) vastgelegd.
 - 2026-10-18 — Voortgangsdashboard gebouwd (`dashboard/index.html`, `dashboard/check-status.mjs`).
 - 2026-10-18 — Flows en architectuur goedgekeurd (PH-DEC-008); M0 afgerond.

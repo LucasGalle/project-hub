@@ -1,6 +1,6 @@
 # M1 — Voortgangsdashboard
 
-**Status:** IN_PROGRESS (gebouwd en getest, AC-001 t/m AC-006 gehaald; wacht op live zetten) · **Inspanning:** S · **Hangt af van:** M0 (DONE), PH-DEC-006 (Cloudflare)
+**Status:** DONE (live op https://project-hub.lucas-galle1.workers.dev, bevestigd door Lucas 2026-10-18) · **Inspanning:** S · **Hangt af van:** M0 (DONE), PH-DEC-006 (Cloudflare)
 
 ## Resultaat (wat Lucas kan zien of doen)
 

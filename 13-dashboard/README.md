@@ -1,6 +1,6 @@
 # Voortgangsdashboard
 
-**Status:** GEBOUWD, wacht op live zetten (PH-DEC-015 beslist dat het er komt; inhoud PH-DEC-012) · **Last updated:** 2026-10-18
+**Status:** LIVE (PH-DEC-015 beslist dat het er komt; inhoud PH-DEC-012) · **Last updated:** 2026-10-18
 
 Een eenvoudige pagina die de live voortgang van dit project toont. Ze leest alleen `project-status.json` in de root van de repo; Claude werkt dat bestand bij na elke afgeronde stap (CLAUDE.md).
 
