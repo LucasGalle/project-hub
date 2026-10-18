@@ -1,0 +1,11 @@
+// Cloudflare Worker die de app serveert (M2). Alleen statische bestanden, geen build nodig.
+// Workers Builds: root directory `app`, deploy command `npx wrangler deploy`.
+{
+  "name": "project-hub-app",
+  "compatibility_date": "2026-10-13",
+  // Publiek adres: https://project-hub-app.lucas-galle1.workers.dev
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public"
+  }
+}

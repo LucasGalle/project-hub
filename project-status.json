@@ -4,7 +4,7 @@
   "phase": {
     "id": "M2",
     "name": "Skelet met demodata",
-    "status": "TODO"
+    "status": "IN_PROGRESS"
   },
   "milestones": [
     {
@@ -24,9 +24,9 @@
     {
       "id": "M2",
       "name": "Skelet met demodata",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "effort_planned": "M",
-      "sessions_used": 0
+      "sessions_used": 1
     },
     {
       "id": "M3",
@@ -97,16 +97,8 @@
       "question": "Mails versturen of als concept?"
     },
     {
-      "id": "PH-DEC-013",
-      "question": "Waar komt de code?"
-    },
-    {
       "id": "PH-DEC-014",
       "question": "Welk AI-model?"
-    },
-    {
-      "id": "PH-DEC-016",
-      "question": "Hoe bouwen we de login op Cloudflare?"
     }
   ],
   "flows": [
@@ -185,6 +177,10 @@
     "pro_plan_usage_pct_manual": null
   },
   "log": [
+    {
+      "date": "2026-10-18",
+      "text": "M2a: alle schermen van het design draaien als app (getrouwe kopie); login wordt zelf gebouwd (PH-DEC-016)"
+    },
     {
       "date": "2026-10-18",
       "text": "M1 afgerond: dashboard live op project-hub.lucas-galle1.workers.dev, bevestigd door Lucas"
