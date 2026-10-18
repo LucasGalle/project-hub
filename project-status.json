@@ -171,11 +171,11 @@
     "monthly_ai_now": 0,
     "resources": [
       {
-        "name": "Supabase-project (gratis)",
+        "name": "GitHub-repo",
         "monthly": 0
       },
       {
-        "name": "GitHub-repo",
+        "name": "Supabase-project (gepauzeerd, te verwijderen)",
         "monthly": 0
       }
     ]
@@ -185,6 +185,10 @@
     "pro_plan_usage_pct_manual": null
   },
   "log": [
+    {
+      "date": "2026-10-18",
+      "text": "Supabase-project gepauzeerd; niet meer nodig na stackkeuze"
+    },
     {
       "date": "2026-10-18",
       "text": "Stack gekozen door Lucas: Cloudflare alles-in-één (PH-DEC-006)"
