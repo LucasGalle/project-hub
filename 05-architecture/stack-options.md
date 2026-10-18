@@ -1,6 +1,6 @@
 # Stackopties met kostprijs
 
-**Status:** NEEDS_INPUT (beslissing PH-DEC-006 door Lucas) · **Last updated:** 2026-10-18 · **Bron:** SRC-PRICE-001
+**Status:** BESLIST — Lucas koos optie **B. Cloudflare alles-in-één** op 2026-10-18 (PH-DEC-006, APPROVED) · **Last updated:** 2026-10-18 · **Bron:** SRC-PRICE-001
 
 Claude kiest de stack niet (PH-DEC-002). Dit document legt vier opties naast elkaar volgens `00-governance/cost-policy.md`. Prijzen zijn opgezocht op 2026-10-18 en worden opnieuw gecheckt vóór de keuze. Wat niet uit een bron komt, staat als **INFERENTIE**.
 
@@ -67,7 +67,14 @@ Grootste knoppen: hoe vaak syncen (PH-DEC-009) en hoeveel inhoud mee gaat naar h
 - Een gratis Supabase-project (`mhnxozxxygsosbzdbnqa`) werd aangemaakt vóór deze werkwijze. Het kost niets en kan verwijderd worden als Lucas een andere optie kiest.
 - Een eerste codeproef (Next.js) staat geparkeerd buiten de repo en is niet in gebruik.
 
-## Advies (geen beslissing)
+## Gevolgen van de keuze (B)
+
+- Web-app, API, sync en planner draaien op Cloudflare Workers/Pages met Cron Triggers; data in D1.
+- Login bouwen we zelf of met een bibliotheek: open beslissing PH-DEC-016, uit te werken vóór M2.
+- Lange syncs worden in stukken verdeeld (rekentijdlimiet per verzoek, te verifiëren in M4).
+- Het gratis Supabase-project is niet meer nodig.
+
+## Advies dat vóór de keuze gegeven werd
 
 Voor "nu" kosten alle opties $0. Het verschil zit in hoeveel bouwwerk (dus Pro-credits) nodig is en wat het later kost. Optie A vraagt het minste bouwwerk maar wordt $45/m zodra het commercieel wordt; optie C houdt die latere kost lager met wat meer werk. Voor het AI-model lijkt een mix van Haiku en Sonnet de beste prijs/kwaliteit. Lucas beslist.
 

@@ -1,53 +1,203 @@
 {
   "project": "Project Hub",
   "updated": "2026-10-18",
-  "phase": { "id": "M0", "name": "Dossier, flows en architectuur", "status": "IN_REVIEW" },
+  "phase": {
+    "id": "M0",
+    "name": "Dossier, flows en architectuur",
+    "status": "IN_REVIEW"
+  },
   "milestones": [
-    { "id": "M0", "name": "Dossier, flows en architectuur", "status": "IN_REVIEW", "effort_planned": "M", "sessions_used": 1 },
-    { "id": "M1", "name": "Stackkeuze + voortgangsdashboard", "status": "TODO", "effort_planned": "S", "sessions_used": 0 },
-    { "id": "M2", "name": "Skelet met demodata", "status": "TODO", "effort_planned": "M", "sessions_used": 0 },
-    { "id": "M3", "name": "Eigen data en beslissen", "status": "TODO", "effort_planned": "M", "sessions_used": 0 },
-    { "id": "M4", "name": "Eerste bron + AI-voorstellen", "status": "TODO", "effort_planned": "L", "sessions_used": 0 },
-    { "id": "M5", "name": "Eerste actie uitvoeren", "status": "TODO", "effort_planned": "M", "sessions_used": 0 },
-    { "id": "M6", "name": "Focusronde compleet", "status": "TODO", "effort_planned": "M", "sessions_used": 0 },
-    { "id": "M7", "name": "Meer bronnen", "status": "TODO", "effort_planned": "L", "sessions_used": 0 },
-    { "id": "M8", "name": "Opvolgen en leren", "status": "TODO", "effort_planned": "M", "sessions_used": 0 }
+    {
+      "id": "M0",
+      "name": "Dossier, flows en architectuur",
+      "status": "IN_REVIEW",
+      "effort_planned": "M",
+      "sessions_used": 1
+    },
+    {
+      "id": "M1",
+      "name": "Stackkeuze + voortgangsdashboard",
+      "status": "IN_PROGRESS",
+      "effort_planned": "S",
+      "sessions_used": 0
+    },
+    {
+      "id": "M2",
+      "name": "Skelet met demodata",
+      "status": "TODO",
+      "effort_planned": "M",
+      "sessions_used": 0
+    },
+    {
+      "id": "M3",
+      "name": "Eigen data en beslissen",
+      "status": "TODO",
+      "effort_planned": "M",
+      "sessions_used": 0
+    },
+    {
+      "id": "M4",
+      "name": "Eerste bron + AI-voorstellen",
+      "status": "TODO",
+      "effort_planned": "L",
+      "sessions_used": 0
+    },
+    {
+      "id": "M5",
+      "name": "Eerste actie uitvoeren",
+      "status": "TODO",
+      "effort_planned": "M",
+      "sessions_used": 0
+    },
+    {
+      "id": "M6",
+      "name": "Focusronde compleet",
+      "status": "TODO",
+      "effort_planned": "M",
+      "sessions_used": 0
+    },
+    {
+      "id": "M7",
+      "name": "Meer bronnen",
+      "status": "TODO",
+      "effort_planned": "L",
+      "sessions_used": 0
+    },
+    {
+      "id": "M8",
+      "name": "Opvolgen en leren",
+      "status": "TODO",
+      "effort_planned": "M",
+      "sessions_used": 0
+    }
   ],
   "decisions_waiting": [
-    { "id": "PH-DEC-006", "question": "Welke tech stack?" },
-    { "id": "PH-DEC-007", "question": "Voor wie is dit?" },
-    { "id": "PH-DEC-008", "question": "Zijn de flows juist?" },
-    { "id": "PH-DEC-005", "question": "Welke bronnen en functies in v1?" },
-    { "id": "PH-DEC-012", "question": "Wat toont het dashboard over de Pro-credits?" },
-    { "id": "PH-DEC-009", "question": "Hoe vaak syncen?" },
-    { "id": "PH-DEC-010", "question": "Wat bewaren we van mails en berichten?" },
-    { "id": "PH-DEC-011", "question": "Mails versturen of als concept?" },
-    { "id": "PH-DEC-013", "question": "Waar komt de code?" },
-    { "id": "PH-DEC-014", "question": "Welk AI-model?" }
+    {
+      "id": "PH-DEC-007",
+      "question": "Voor wie is dit?"
+    },
+    {
+      "id": "PH-DEC-008",
+      "question": "Zijn de flows juist?"
+    },
+    {
+      "id": "PH-DEC-005",
+      "question": "Welke bronnen en functies in v1?"
+    },
+    {
+      "id": "PH-DEC-012",
+      "question": "Wat toont het dashboard over de Pro-credits?"
+    },
+    {
+      "id": "PH-DEC-009",
+      "question": "Hoe vaak syncen?"
+    },
+    {
+      "id": "PH-DEC-010",
+      "question": "Wat bewaren we van mails en berichten?"
+    },
+    {
+      "id": "PH-DEC-011",
+      "question": "Mails versturen of als concept?"
+    },
+    {
+      "id": "PH-DEC-013",
+      "question": "Waar komt de code?"
+    },
+    {
+      "id": "PH-DEC-014",
+      "question": "Welk AI-model?"
+    },
+    {
+      "id": "PH-DEC-016",
+      "question": "Hoe bouwen we de login op Cloudflare?"
+    }
   ],
   "flows": [
-    { "id": "PH-FLOW-001", "name": "Agent leest bronnen", "status": "PROPOSED" },
-    { "id": "PH-FLOW-002", "name": "Focusronde", "status": "PROPOSED" },
-    { "id": "PH-FLOW-003", "name": "Voorstel beslissen", "status": "PROPOSED" },
-    { "id": "PH-FLOW-004", "name": "Voorstel uitvoeren", "status": "PROPOSED" },
-    { "id": "PH-FLOW-005", "name": "Inbox", "status": "PROPOSED" },
-    { "id": "PH-FLOW-006", "name": "Projectbeheer", "status": "PROPOSED" },
-    { "id": "PH-FLOW-007", "name": "Teamopvolging", "status": "PROPOSED" },
-    { "id": "PH-FLOW-008", "name": "Bronnen koppelen", "status": "PROPOSED" },
-    { "id": "PH-FLOW-009", "name": "Aanmelden", "status": "NEEDS_INPUT" },
-    { "id": "PH-FLOW-010", "name": "Leren van feedback", "status": "PROPOSED" }
+    {
+      "id": "PH-FLOW-001",
+      "name": "Agent leest bronnen",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-002",
+      "name": "Focusronde",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-003",
+      "name": "Voorstel beslissen",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-004",
+      "name": "Voorstel uitvoeren",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-005",
+      "name": "Inbox",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-006",
+      "name": "Projectbeheer",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-007",
+      "name": "Teamopvolging",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-008",
+      "name": "Bronnen koppelen",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "PH-FLOW-009",
+      "name": "Aanmelden",
+      "status": "NEEDS_INPUT"
+    },
+    {
+      "id": "PH-FLOW-010",
+      "name": "Leren van feedback",
+      "status": "PROPOSED"
+    }
   ],
   "costs": {
     "currency": "USD",
     "monthly_services_now": 0,
     "monthly_ai_now": 0,
     "resources": [
-      { "name": "Supabase-project (gratis)", "monthly": 0 },
-      { "name": "GitHub-repo", "monthly": 0 }
+      {
+        "name": "Supabase-project (gratis)",
+        "monthly": 0
+      },
+      {
+        "name": "GitHub-repo",
+        "monthly": 0
+      }
     ]
   },
-  "effort": { "unit": "sessies Claude Code", "pro_plan_usage_pct_manual": null },
+  "effort": {
+    "unit": "sessies Claude Code",
+    "pro_plan_usage_pct_manual": null
+  },
   "log": [
-    { "date": "2026-10-18", "text": "Dossier opgezet: governance, flows, architectuur, stackopties, roadmap" }
-  ]
+    {
+      "date": "2026-10-18",
+      "text": "Stack gekozen door Lucas: Cloudflare alles-in-één (PH-DEC-006)"
+    },
+    {
+      "date": "2026-10-18",
+      "text": "Dossier opgezet: governance, flows, architectuur, stackopties, roadmap"
+    }
+  ],
+  "stack": {
+    "decision": "PH-DEC-006",
+    "choice": "Cloudflare alles-in-één (Workers/Pages, D1, Cron Triggers)",
+    "monthly_now": 0,
+    "monthly_commercial": 5
+  }
 }

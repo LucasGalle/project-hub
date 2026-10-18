@@ -8,7 +8,6 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 
 | ID | Vraag | Opties | Voorstel van Claude | Status |
 |---|---|---|---|---|
-| PH-DEC-006 | Welke tech stack? | A Vercel+Supabase · B Cloudflare · C Cloudflare+Supabase · D low-code | zie `05-architecture/stack-options.md`; geen keuze door Claude | NEEDS_INPUT |
 | PH-DEC-007 | Voor wie is dit? | alleen Lucas · klein team · product voor kmo's | eerst alleen Lucas, zo gebouwd dat teams later kunnen | NEEDS_INPUT |
 | PH-DEC-008 | Zijn de flows juist? | goedkeuren · aanpassen | `03-flows/` | NEEDS_INPUT |
 | PH-DEC-005 | Welke bronnen en functies in v1? | zie capability map | Slack, Asana, Calendar; Vandaag, Focusronde, Beslissen | NEEDS_INPUT |
@@ -18,6 +17,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-011 | Mails versturen of als concept klaarzetten? | versturen · concept in Gmail | concept in v1 | NEEDS_INPUT |
 | PH-DEC-013 | Waar komt de code? | in deze repo (map `app/`) · aparte repo | deze repo | NEEDS_INPUT |
 | PH-DEC-014 | Welk AI-model? | Haiku · Sonnet · mix | mix Haiku + Sonnet | NEEDS_INPUT |
+| PH-DEC-016 | Hoe bouwen we de login op Cloudflare? | zelf Google-login (OAuth) bouwen · open-source loginbibliotheek · externe logindienst (kost te bekijken) | uit te werken met kosten vóór M2 | NEEDS_INPUT |
 
 ## Beslist
 
@@ -27,6 +27,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-002 | De tech stack en elke betaalde dienst worden samen bepaald op kostprijs; Lucas beslist, niet Claude | SRC-REQ-002 | APPROVED |
 | PH-DEC-003 | Werkvolgorde: flows → architectuur → stackkeuze → bouwen in kleine milestones | SRC-REQ-002 | APPROVED |
 | PH-DEC-004 | Het prototype v8 is het doeldesign | SRC-REQ-001, SRC-DES-001 | APPROVED |
+| PH-DEC-006 | Tech stack: optie B, Cloudflare alles-in-één (Workers/Pages, D1, Cron Triggers). Gratis tijdens bouwen, ± $5/m (Workers Paid) bij commercieel gebruik; login en realtime bouwen we zelf | keuze van Lucas in de projectthread, 2026-10-18 | APPROVED |
 | PH-DEC-015 | Er komt een live voortgangsdashboard van dit project, gevoed door `project-status.json` | SRC-REQ-002 | APPROVED (inhoud: PH-DEC-012) |
 
 Detail per beslissing kan in `open/` of `approved/` met `templates/decision-template.md` wanneer een tabelrij niet volstaat.

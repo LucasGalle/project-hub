@@ -32,7 +32,7 @@ Een projectmanager verliest dagelijks tijd aan het bijeen zoeken van informatie 
 | Klikbaar prototype met alle schermen | ✅ klaar (demodata) | `SRC-DES-001`, versie 8 |
 | Projectdossier | 🟡 in opbouw | deze repo |
 | Flows | 🟡 draft | `03-flows/` |
-| Architectuur en stack | 🟡 voorstel | `05-architecture/`, PH-DEC-006 open |
+| Architectuur en stack | 🟡 architectuur voorstel, stack beslist | `05-architecture/`, PH-DEC-006 Cloudflare |
 | Werkende app | ⬜ niet gestart | — |
 
 ## Wat is het niet (voorlopig)?

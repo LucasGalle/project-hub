@@ -10,7 +10,7 @@ Dit repository is het **projectdossier en de blueprint** voor Project Hub: een A
 - **Eigenaar:** Lucas Galle
 - **Huidige fase:** **M0 — Dossier, flows en architectuur** (ter review) (zie `PROJECT_STATUS.md`)
 - **Doeldesign:** Claude Design-canvas "Project Hub", versie 8 (`SRC-DES-001`)
-- **Tech stack:** **nog niet gekozen** (`PH-DEC-006`, NEEDS_INPUT). Lucas kiest samen met Claude op basis van kostprijs.
+- **Tech stack:** **Cloudflare alles-in-één** (Workers/Pages, D1, Cron Triggers), gekozen door Lucas op kostprijs (`PH-DEC-006`).
 
 ## Start hier
 
