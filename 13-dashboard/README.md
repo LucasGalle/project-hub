@@ -36,11 +36,13 @@ Zie het bestand zelf; velden: `project`, `updated`, `phase`, `milestones[]`, `de
 - Controle: `node dashboard/check-status.mjs` weigert een ongeldig `project-status.json`.
 - Getest op 2026-10-18 in Chromium: desktop licht en donker, gsm 375 px (geen horizontaal scrollen), foutmelding bij ontbrekend en bij ongeldig bestand; de controle weigert een bestand met een onbekende status.
 
-## Live zetten op Cloudflare Pages (eenmalig, door Lucas)
+## Live op Cloudflare (Worker `project-hub`)
 
-1. Cloudflare-dashboard › **Workers & Pages** › **Create** › **Pages** › **Connect to Git**.
-2. Kies de repo `LucasGalle/project-hub`, branch `main`.
-3. Framework preset: **None**. Build command: `node dashboard/check-status.mjs && cp project-status.json dashboard/`. Build output directory: `dashboard`.
-4. **Save and Deploy**. Het adres wordt `https://<naam>.pages.dev`.
+Lucas koppelde de repo op 2026-10-18 als Cloudflare **Worker** `project-hub` (Workers Builds), niet als Pages-project. Dat werkt ook en is gratis.
 
-Daarna werkt elke push naar `main` de pagina vanzelf bij. Kost: $0 (gratis plan).
+- `wrangler.jsonc` in de root zorgt dat alleen de map `dashboard/` online komt (niet de rest van het dossier).
+- Build command (instellingen van de Worker › Build): `node dashboard/check-status.mjs && cp project-status.json dashboard/`
+- Deploy command: `npx wrangler deploy`
+- Adres: `https://project-hub.<account>.workers.dev` (te bevestigen).
+
+Elke push naar `main` bouwt en publiceert de pagina opnieuw. Kost: $0 (gratis plan).

@@ -9,7 +9,7 @@ Een webpagina die de live voortgang van Project Hub toont: fase, milestones, goe
 ## Keuzes binnen deze milestone
 
 - **Inhoud over Pro-credits (PH-DEC-012):** standaard voorstel (a)+(b): geplande inspanning per milestone (S/M/L) tegenover gebruikte sessies, plus een optioneel veld `effort.pro_plan_usage_pct_manual` dat Lucas zelf invult. Lucas kan dit nog wijzigen.
-- **Hosting:** Cloudflare Pages (gratis), gekoppeld aan deze repo; volgt PH-DEC-006. Geen betaalde dienst.
+- **Hosting:** Cloudflare Worker met statische bestanden (gratis; Lucas koppelde het als Worker), gekoppeld aan deze repo; volgt PH-DEC-006. Geen betaalde dienst.
 - **Code:** in deze repo, map `dashboard/` (voorstel PH-DEC-013).
 - **Zichtbaarheid:** de pagina is standaard publiek bereikbaar via een `*.pages.dev`-adres. Afschermen kan gratis met Cloudflare Access; **NEEDS_INPUT** of dat nodig is.
 
@@ -19,7 +19,8 @@ Een webpagina die de live voortgang van Project Hub toont: fase, milestones, goe
 |---|---|
 | `dashboard/index.html` | de pagina (HTML, CSS, JavaScript zonder framework), stijl uit het prototype |
 | `dashboard/check-status.mjs` | controleert of `project-status.json` geldig is; draait bij elke build |
-| build op Cloudflare Pages | `node dashboard/check-status.mjs && cp project-status.json dashboard/` · uitvoermap `dashboard` |
+| `wrangler.jsonc` | beperkt wat online komt tot `dashboard/` |
+| build op Cloudflare (Worker `project-hub`) | `node dashboard/check-status.mjs && cp project-status.json dashboard/` · uitvoermap `dashboard` |
 
 ## Acceptatiecriteria
 

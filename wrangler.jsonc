@@ -1,0 +1,10 @@
+// Cloudflare Worker die alleen het voortgangsdashboard serveert (M1, PH-DEC-006).
+// Build command in Workers Builds: node dashboard/check-status.mjs && cp project-status.json dashboard/
+// Deploy command: npx wrangler deploy
+{
+  "name": "project-hub",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "./dashboard"
+  }
+}
