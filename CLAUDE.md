@@ -15,6 +15,7 @@ Lees vóór elke taak, in deze volgorde:
 - Verzin geen productregels. Ontbreekt iets: maak een beslissing met status `NEEDS_INPUT`.
 - Bouw niets voordat de flows en de architectuur zijn goedgekeurd (PH-DEC-003).
 - Het prototype (`02-sources/raw/project-hub-prototype-v8.dc.html`) is het doeldesign, niet het bewijs dat iets werkt. Al zijn data is demodata.
+- De app is een getrouwe kopie van dat design (PH-DEC-017): neem schermen, layout, tokens, lettertypes, animaties en teksten exact over. Geen eigen stijl of 'verbeteringen' zonder goedkeuring van Lucas. Elke milestone met schermen vergelijkt het resultaat naast het prototype (schermafbeelding).
 - Elke wijziging aan het product wordt eerst in dit dossier beschreven, daarna gebouwd, daarna hier als gedaan gemarkeerd met bewijs (PR, commit).
 - Werk `PROJECT_STATUS.md` en `project-status.json` bij na elke afgeronde stap; het voortgangsdashboard leest die.
 - Schrijf in het Nederlands (Vlaams). Code, identifiers en commitberichten volgen de conventie van de code.

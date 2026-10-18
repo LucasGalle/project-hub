@@ -1,6 +1,6 @@
 # Designstatus
 
-**Status:** APPROVED als doeldesign (PH-DEC-004) · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001
+**Status:** APPROVED als doeldesign (PH-DEC-004); de app is er een getrouwe kopie van (PH-DEC-017) · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001
 
 | Onderdeel | In prototype | Opmerking |
 |---|---|---|

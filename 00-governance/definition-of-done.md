@@ -16,3 +16,4 @@
 5. Geen productregel is gegokt.
 6. Dossier, `PROJECT_STATUS.md` en `project-status.json` zijn bijgewerkt met bewijs (PR, commit, URL).
 7. De volgende afhankelijke stap is benoemd.
+8. Bij schermen: het resultaat is naast het prototype gelegd (schermafbeeldingen) en komt er getrouw mee overeen (PH-DEC-017).
