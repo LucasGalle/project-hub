@@ -4,6 +4,8 @@
 {
   "name": "project-hub",
   "compatibility_date": "2026-10-13",
+  // Publiek adres: https://project-hub.lucas-galle1.workers.dev
+  "workers_dev": true,
   "assets": {
     "directory": "./dashboard"
   }

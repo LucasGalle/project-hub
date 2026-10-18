@@ -43,6 +43,6 @@ Lucas koppelde de repo op 2026-10-18 als Cloudflare **Worker** `project-hub` (Wo
 - `wrangler.jsonc` in de root zorgt dat alleen de map `dashboard/` online komt (niet de rest van het dossier).
 - Build command (instellingen van de Worker › Build): `node dashboard/check-status.mjs && cp project-status.json dashboard/`
 - Deploy command: `npx wrangler deploy`
-- Adres: `https://project-hub.<account>.workers.dev` (te bevestigen).
+- Adres: `https://project-hub.lucas-galle1.workers.dev` (aangezet met `workers_dev: true` in `wrangler.jsonc`).
 
 Elke push naar `main` bouwt en publiceert de pagina opnieuw. Kost: $0 (gratis plan).
