@@ -1,6 +1,6 @@
 # PH-FLOW-008 — Bronnen verbinden en per project koppelen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Bronnen)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Bronnen)
 
 ## Doel
 

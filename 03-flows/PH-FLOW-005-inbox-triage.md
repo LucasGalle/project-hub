@@ -1,6 +1,6 @@
 # PH-FLOW-005 — Inbox: voorstellen over alle projecten afhandelen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Inbox)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Inbox)
 
 ## Doel
 

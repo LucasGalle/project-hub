@@ -1,6 +1,6 @@
 # PH-FLOW-010 — Agent leert van afwijsredenen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (afwijzen met reden)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (afwijzen met reden)
 
 ## Doel
 

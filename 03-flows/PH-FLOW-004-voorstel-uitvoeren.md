@@ -1,6 +1,6 @@
 # PH-FLOW-004 — Goedgekeurd voorstel uitvoeren in een externe tool
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (actietypes in demodata)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (actietypes in demodata)
 
 ## Doel
 

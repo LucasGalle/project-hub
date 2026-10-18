@@ -1,18 +1,16 @@
 # Project status
 
-**Last updated:** 2026-10-18 · **Fase:** M0 — dossier, flows en architectuur (ter review bij Lucas)
+**Last updated:** 2026-10-18 · **Fase:** M1 — voortgangsdashboard
 
 ## Nu
 
-- Dossier, flows (PH-FLOW-001 t/m 010) en logische architectuur staan klaar voor review.
-- Er wordt **niets gebouwd** tot de flows goedgekeurd zijn (PH-DEC-003, PH-DEC-008).
-- Stack gekozen door Lucas: **Cloudflare alles-in-één** (PH-DEC-006, 2026-10-18).
+- Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
+- M1: voortgangsdashboard gebouwd en getest (`dashboard/`); wacht op de eenmalige koppeling met Cloudflare Pages door Lucas (`13-dashboard/README.md`).
 
 ## Wacht op Lucas
 
 1. **PH-DEC-007** — voor wie is dit (alleen Lucas, team, product)?
-2. **PH-DEC-008** — flows goedkeuren of aanpassen
-3. **PH-DEC-012** — wat het dashboard over de Pro-credits toont
+2. **PH-DEC-012** — wat het dashboard over de Pro-credits toont
 
 Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
@@ -20,7 +18,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 | ID | Milestone | Status |
 |---|---|---|
-| M0 | Dossier, flows en architectuur | IN_REVIEW |
+| M0 | Dossier, flows en architectuur | DONE |
 | M1 | Stackkeuze + voortgangsdashboard | IN_PROGRESS (stack beslist) |
 | M2–M8 | zie `12-roadmap/milestone-map.md` | TODO |
 
@@ -34,6 +32,8 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-18 — Voortgangsdashboard gebouwd (`dashboard/index.html`, `dashboard/check-status.mjs`).
+- 2026-10-18 — Flows en architectuur goedgekeurd (PH-DEC-008); M0 afgerond.
 - 2026-10-18 — Supabase-project gepauzeerd (niet meer nodig na PH-DEC-006).
 
 - 2026-10-18 — PH-DEC-006 beslist: Cloudflare alles-in-één. Nieuwe open beslissing PH-DEC-016 (login).

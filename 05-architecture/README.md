@@ -1,6 +1,6 @@
 # Architectuur
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18
+**Status:** APPROVED (logische architectuur, door Lucas gelezen en goedgekeurd 2026-10-18) · **Owner:** Lucas · **Last updated:** 2026-10-18
 
 Dit is de **logische** architectuur: welke onderdelen er zijn en wat ze doen, zonder leverancier. Welke dienst elk onderdeel invult, kiest Lucas in PH-DEC-006 op basis van `stack-options.md`.
 

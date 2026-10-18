@@ -1,6 +1,6 @@
 # PH-FLOW-001 — Agent leest bronnen en maakt voorstellen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Bronnen, Vandaag)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Bronnen, Vandaag)
 
 ## Doel
 

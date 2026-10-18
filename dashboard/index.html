@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Hub · voortgang</title>
+<meta name="description" content="Live voortgang van het project Project Hub, gevoed door project-status.json.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Tokens overgenomen uit het prototype (SRC-DES-001) */
+:root{--bg:#EEEDF6;--surface:#FFFFFF;--surface-2:#F6F5FB;--surface-3:#ECEAF4;--border:rgba(30,27,75,.08);--border-strong:rgba(30,27,75,.16);--text:#1A1838;--text-2:#4B4868;--text-3:#6B6886;--accent:#6C5CF5;--accent-weak:rgba(108,92,245,.09);--accent-mid:rgba(108,92,245,.18);--accent-text:#5141D8;--ok:#0F8A5F;--ok-fill:#1DB57F;--ok-weak:rgba(29,181,127,.13);--warn:#A35A00;--warn-fill:#F2A23C;--warn-weak:rgba(242,162,60,.16);--crit:#D23B45;--crit-weak:rgba(238,90,99,.12);--orb1:#C7BEFF;--orb2:#B6EDD8;--orb3:#FFD3BE;--orb-o:.7;--sh1:0 1px 2px rgba(30,27,75,.04),0 10px 30px -18px rgba(30,27,75,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0A15;--surface:#151528;--surface-2:#1B1B32;--surface-3:#25253F;--border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.14);--text:#EEEDF8;--text-2:#B4B2CE;--text-3:#8E8CAB;--accent:#9C8EFF;--accent-weak:rgba(156,142,255,.10);--accent-mid:rgba(156,142,255,.20);--accent-text:#BDB3FF;--ok:#4DDCA3;--ok-fill:#3CCB92;--ok-weak:rgba(77,220,163,.12);--warn:#F7BA5C;--warn-fill:#F2A23C;--warn-weak:rgba(247,186,92,.13);--crit:#FF7C83;--crit-weak:rgba(255,124,131,.13);--orb1:#3A2C99;--orb2:#0C5A45;--orb3:#6B3022;--orb-o:.5;--sh1:0 1px 0 rgba(255,255,255,.04) inset,0 10px 30px -18px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{--bg:#0A0A15;--surface:#151528;--surface-2:#1B1B32;--surface-3:#25253F;--border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.14);--text:#EEEDF8;--text-2:#B4B2CE;--text-3:#8E8CAB;--accent:#9C8EFF;--accent-weak:rgba(156,142,255,.10);--accent-mid:rgba(156,142,255,.20);--accent-text:#BDB3FF;--ok:#4DDCA3;--ok-fill:#3CCB92;--ok-weak:rgba(77,220,163,.12);--warn:#F7BA5C;--warn-fill:#F2A23C;--warn-weak:rgba(247,186,92,.13);--crit:#FF7C83;--crit-weak:rgba(255,124,131,.13);--orb1:#3A2C99;--orb2:#0C5A45;--orb3:#6B3022;--orb-o:.5;--sh1:0 1px 0 rgba(255,255,255,.04) inset,0 10px 30px -18px rgba(0,0,0,.7)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+.bgfx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bgfx i{position:absolute;border-radius:50%;filter:blur(80px);opacity:var(--orb-o)}
+.bgfx i:nth-child(1){width:480px;height:480px;background:var(--orb1);left:-140px;top:-160px}
+.bgfx i:nth-child(2){width:420px;height:420px;background:var(--orb2);right:-120px;top:120px}
+.bgfx i:nth-child(3){width:380px;height:380px;background:var(--orb3);left:30%;bottom:-200px}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 64px}
+h1,h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.01em}
+h1{font-size:34px;line-height:1.1}
+h2{font-size:17px;margin-bottom:14px}
+.mono,.tnum{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.muted{color:var(--text-3)}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px}
+.eyebrow{font-size:12.5px;color:var(--accent-text);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.phase{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--sh1);font-weight:500}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--sh1);padding:20px}
+.kpi .label{font-size:12.5px;color:var(--text-3)}
+.kpi .value{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:32px;font-weight:700;line-height:1.15;margin-top:4px}
+.kpi .sub{font-size:12.5px;color:var(--text-2);margin-top:2px}
+.kpi.attn{border-color:var(--warn-fill);background:linear-gradient(var(--warn-weak),var(--warn-weak)),var(--surface)}
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+.stack{display:grid;gap:18px}
+ol,ul{list-style:none;padding:0}
+.ms{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--border)}
+.ms:first-child{border-top:0;padding-top:0}
+.ms .id{color:var(--text-3);font-size:12.5px}
+.ms .name{font-weight:500}
+.effort{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:var(--text-3)}
+.bar{flex:1;max-width:180px;height:6px;border-radius:999px;background:var(--surface-3);overflow:hidden}
+.bar span{display:block;height:100%;border-radius:999px;background:var(--accent)}
+.bar span.over{background:var(--warn-fill)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.s-DONE,.s-APPROVED{background:var(--ok-weak);color:var(--ok)}
+.s-IN_PROGRESS,.s-IN_REVIEW{background:var(--accent-weak);color:var(--accent-text)}
+.s-TODO,.s-PROPOSED,.s-SUPERSEDED{background:var(--surface-3);color:var(--text-2)}
+.s-NEEDS_INPUT,.s-BLOCKED{background:var(--warn-weak);color:var(--warn)}
+.s-REJECTED{background:var(--crit-weak);color:var(--crit)}
+.dec li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--border)}
+.dec li:first-child{border-top:0;padding-top:0}
+.dec .id{font-size:12px;color:var(--warn);flex:none;padding-top:1px}
+.flows{display:grid;grid-template-columns:1fr;gap:6px}
+.flows li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:13px}
+.flows .id{color:var(--text-3);font-size:12px;margin-right:6px}
+.cost .total{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:26px;font-weight:700}
+.cost li{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-top:1px solid var(--border)}
+.log li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;font-size:13px;padding:8px 0;border-top:1px solid var(--border)}
+.log li:first-child{border-top:0;padding-top:0}
+.note{font-size:12.5px;color:var(--text-3);margin-top:10px}
+.error{border-color:var(--crit);background:linear-gradient(var(--crit-weak),var(--crit-weak)),var(--surface)}
+.error h2{color:var(--crit)}
+footer{margin-top:28px;font-size:12.5px;color:var(--text-3)}
+footer a{color:var(--accent-text)}
+[hidden]{display:none!important}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.wrap{padding:24px 16px 48px}h1{font-size:28px}.kpi .value{font-size:26px}.ms{grid-template-columns:36px minmax(0,1fr)}.ms .chip{grid-column:2;justify-self:start}}
+@media (prefers-reduced-motion:no-preference){.card{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}.bar span{animation:grow .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:left}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@keyframes grow{from{transform:scaleX(0)}}
+</style>
+</head>
+<body>
+<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
+<main class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Voortgang</div>
+      <h1 id="title">Project Hub</h1>
+      <p class="muted" id="updated">Laden…</p>
+    </div>
+    <div class="phase" id="phase" hidden><span class="dot"></span><span id="phase-text"></span></div>
+  </header>
+
+  <section class="card error" id="error" hidden role="alert">
+    <h2>De voortgang kon niet geladen worden</h2>
+    <p id="error-text"></p>
+  </section>
+
+  <div id="content" hidden>
+    <section class="kpis" aria-label="Kerncijfers">
+      <div class="card kpi"><div class="label">Milestones klaar</div><div class="value tnum" id="k-ms"></div><div class="sub" id="k-ms-sub"></div></div>
+      <div class="card kpi"><div class="label">Flows goedgekeurd</div><div class="value tnum" id="k-flows"></div><div class="sub" id="k-flows-sub"></div></div>
+      <div class="card kpi" id="k-dec-card"><div class="label">Wacht op Lucas</div><div class="value tnum" id="k-dec"></div><div class="sub">open beslissingen</div></div>
+      <div class="card kpi"><div class="label">Maandkost nu</div><div class="value tnum" id="k-cost"></div><div class="sub" id="k-cost-sub"></div></div>
+    </section>
+
+    <div class="grid">
+      <div class="stack">
+        <section class="card">
+          <h2>Milestones</h2>
+          <ol id="milestones"></ol>
+          <p class="note" id="effort-note"></p>
+        </section>
+        <section class="card log">
+          <h2>Laatste wijzigingen</h2>
+          <ul id="log"></ul>
+        </section>
+      </div>
+      <div class="stack">
+        <section class="card dec">
+          <h2>Beslissingen die op Lucas wachten</h2>
+          <ul id="decisions"></ul>
+        </section>
+        <section class="card cost">
+          <h2>Kosten</h2>
+          <div id="stack" class="muted"></div>
+          <ul id="resources" style="margin-top:10px"></ul>
+        </section>
+        <section class="card">
+          <h2>Flows</h2>
+          <ul class="flows" id="flows"></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer>Gevoed door <span class="mono">project-status.json</span> in het projectdossier. Bron van waarheid: <a href="https://github.com/LucasGalle/project-hub">LucasGalle/project-hub</a>.</footer>
+</main>
+
+<script>
+const LABEL = {DONE:'Klaar',IN_PROGRESS:'Bezig',IN_REVIEW:'In review',TODO:'Te doen',BLOCKED:'Geblokkeerd',APPROVED:'Goedgekeurd',PROPOSED:'Voorstel',NEEDS_INPUT:'Wacht op input',REJECTED:'Afgewezen',SUPERSEDED:'Vervangen'};
+const EFFORT_SESSIONS = {S:1, M:3, L:5};
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+const chip = s => el('span', 'chip s-' + s, LABEL[s] || s);
+const money = (v, cur) => (cur === 'EUR' ? '€' : '$') + (Math.round(v * 100) / 100).toLocaleString('nl-BE');
+const date = d => new Date(d + 'T12:00:00').toLocaleDateString('nl-BE', {day:'numeric', month:'short', year:'numeric'});
+
+function render(d) {
+  if (!d || !Array.isArray(d.milestones) || !Array.isArray(d.flows) || !Array.isArray(d.decisions_waiting)) throw new Error('Het bestand heeft niet de verwachte vorm.');
+  document.title = d.project + ' · voortgang';
+  $('title').textContent = d.project;
+  $('updated').textContent = 'Bijgewerkt op ' + date(d.updated);
+  if (d.phase) { $('phase-text').textContent = d.phase.id + ' · ' + d.phase.name; $('phase').hidden = false; }
+
+  const done = d.milestones.filter(m => m.status === 'DONE').length;
+  $('k-ms').textContent = done + '/' + d.milestones.length;
+  const current = d.milestones.find(m => m.status === 'IN_PROGRESS' || m.status === 'IN_REVIEW');
+  $('k-ms-sub').textContent = current ? 'nu: ' + current.name : '';
+  const ok = d.flows.filter(f => f.status === 'APPROVED').length;
+  $('k-flows').textContent = ok + '/' + d.flows.length;
+  $('k-flows-sub').textContent = d.flows.length - ok ? (d.flows.length - ok) + ' nog open' : 'alles goedgekeurd';
+  $('k-dec').textContent = d.decisions_waiting.length;
+  $('k-dec-card').classList.toggle('attn', d.decisions_waiting.length > 0);
+  const c = d.costs || {};
+  $('k-cost').textContent = money((c.monthly_services_now || 0) + (c.monthly_ai_now || 0), c.currency);
+  $('k-cost-sub').textContent = 'diensten ' + money(c.monthly_services_now || 0, c.currency) + ' · AI ' + money(c.monthly_ai_now || 0, c.currency);
+
+  const ms = $('milestones'); ms.replaceChildren();
+  let used = 0;
+  for (const m of d.milestones) {
+    const li = el('li', 'ms');
+    li.append(el('span', 'id mono', m.id));
+    const mid = el('div');
+    mid.append(el('div', 'name', m.name));
+    const planned = EFFORT_SESSIONS[m.effort_planned] || 1;
+    used += m.sessions_used || 0;
+    const ef = el('div', 'effort');
+    const bar = el('div', 'bar'); bar.setAttribute('role', 'img');
+    bar.setAttribute('aria-label', (m.sessions_used || 0) + ' van ongeveer ' + planned + ' sessies gebruikt');
+    const fill = el('span', (m.sessions_used || 0) > planned ? 'over' : '');
+    fill.style.width = Math.min(100, ((m.sessions_used || 0) / planned) * 100) + '%';
+    bar.append(fill);
+    ef.append(el('span', 'mono', 'inspanning ' + m.effort_planned), bar, el('span', 'tnum', (m.sessions_used || 0) + '/' + planned + ' sessies'));
+    mid.append(ef);
+    li.append(mid, chip(m.status));
+    ms.append(li);
+  }
+  const pct = d.effort && d.effort.pro_plan_usage_pct_manual;
+  $('effort-note').textContent = 'Inspanning in sessies Claude Code (S ≈ 1, M ≈ 3, L ≈ 5). Totaal gebruikt: ' + used + '.' +
+    (pct == null ? ' Verbruik van het Pro-plan nog niet ingevuld.' : ' Verbruik Pro-plan (zelf ingevuld): ' + pct + '%.');
+
+  const dec = $('decisions'); dec.replaceChildren();
+  if (!d.decisions_waiting.length) dec.append(el('li', 'muted', 'Niets: alles is beslist.'));
+  for (const q of d.decisions_waiting) { const li = el('li'); li.append(el('span', 'id mono', q.id), el('span', null, q.question)); dec.append(li); }
+
+  $('stack').textContent = d.stack ? 'Stack: ' + d.stack.choice + '. Commercieel ± ' + money(d.stack.monthly_commercial, c.currency) + '/maand.' : 'Stack nog niet gekozen.';
+  const res = $('resources'); res.replaceChildren();
+  for (const r of c.resources || []) { const li = el('li'); li.append(el('span', null, r.name), el('span', 'tnum', money(r.monthly, c.currency) + '/m')); res.append(li); }
+
+  const fl = $('flows'); fl.replaceChildren();
+  for (const f of d.flows) { const li = el('li'); const n = el('span'); n.append(el('span', 'id mono', f.id.replace('PH-FLOW-', '')), document.createTextNode(f.name)); li.append(n, chip(f.status)); fl.append(li); }
+
+  const log = $('log'); log.replaceChildren();
+  for (const l of (d.log || []).slice(0, 8)) { const li = el('li'); li.append(el('span', 'muted tnum', date(l.date)), el('span', null, l.text)); log.append(li); }
+
+  $('content').hidden = false;
+}
+
+function fail(msg) {
+  $('updated').textContent = '';
+  $('error-text').textContent = msg + ' Controleer of project-status.json aanwezig en geldig is.';
+  $('error').hidden = false;
+}
+
+fetch('project-status.json', {cache: 'no-store'})
+  .then(r => { if (!r.ok) throw new Error('Bestand niet gevonden (' + r.status + ').'); return r.json(); })
+  .then(render)
+  .catch(e => fail(e.message));
+</script>
+</body>
+</html>

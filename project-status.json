@@ -2,24 +2,24 @@
   "project": "Project Hub",
   "updated": "2026-10-18",
   "phase": {
-    "id": "M0",
-    "name": "Dossier, flows en architectuur",
-    "status": "IN_REVIEW"
+    "id": "M1",
+    "name": "Voortgangsdashboard",
+    "status": "IN_PROGRESS"
   },
   "milestones": [
     {
       "id": "M0",
       "name": "Dossier, flows en architectuur",
-      "status": "IN_REVIEW",
+      "status": "DONE",
       "effort_planned": "M",
       "sessions_used": 1
     },
     {
       "id": "M1",
-      "name": "Stackkeuze + voortgangsdashboard",
+      "name": "Voortgangsdashboard",
       "status": "IN_PROGRESS",
       "effort_planned": "S",
-      "sessions_used": 0
+      "sessions_used": 1
     },
     {
       "id": "M2",
@@ -77,10 +77,6 @@
       "question": "Voor wie is dit?"
     },
     {
-      "id": "PH-DEC-008",
-      "question": "Zijn de flows juist?"
-    },
-    {
       "id": "PH-DEC-005",
       "question": "Welke bronnen en functies in v1?"
     },
@@ -117,42 +113,42 @@
     {
       "id": "PH-FLOW-001",
       "name": "Agent leest bronnen",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-002",
       "name": "Focusronde",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-003",
       "name": "Voorstel beslissen",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-004",
       "name": "Voorstel uitvoeren",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-005",
       "name": "Inbox",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-006",
       "name": "Projectbeheer",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-007",
       "name": "Teamopvolging",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-008",
       "name": "Bronnen koppelen",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     },
     {
       "id": "PH-FLOW-009",
@@ -162,7 +158,7 @@
     {
       "id": "PH-FLOW-010",
       "name": "Leren van feedback",
-      "status": "PROPOSED"
+      "status": "APPROVED"
     }
   ],
   "costs": {
@@ -185,6 +181,14 @@
     "pro_plan_usage_pct_manual": null
   },
   "log": [
+    {
+      "date": "2026-10-18",
+      "text": "Voortgangsdashboard gebouwd en getest; wacht op koppeling met Cloudflare Pages"
+    },
+    {
+      "date": "2026-10-18",
+      "text": "Flows en architectuur goedgekeurd door Lucas (PH-DEC-008); M0 afgerond"
+    },
     {
       "date": "2026-10-18",
       "text": "Supabase-project gepauzeerd; niet meer nodig na stackkeuze"

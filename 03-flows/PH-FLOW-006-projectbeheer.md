@@ -1,6 +1,6 @@
 # PH-FLOW-006 — Projecten opvolgen en een project openen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Projecten, Project Hub)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Projecten, Project Hub)
 
 ## Doel
 

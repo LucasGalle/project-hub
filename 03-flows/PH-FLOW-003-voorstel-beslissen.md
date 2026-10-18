@@ -1,6 +1,6 @@
 # PH-FLOW-003 — Voorstel beslissen
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Beslissen, detail-pop-up)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Beslissen, detail-pop-up)
 
 ## Doel
 

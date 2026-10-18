@@ -1,6 +1,6 @@
 # PH-FLOW-007 — Team opvolgen met een statusvraag
 
-**Status:** PROPOSED · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Opvolgen, Team-tab, Slack-dialoog)
+**Status:** APPROVED (PH-DEC-008) · **Owner:** Lucas · **Last updated:** 2026-10-18 · **Bron:** SRC-DES-001 (Opvolgen, Team-tab, Slack-dialoog)
 
 ## Doel
 

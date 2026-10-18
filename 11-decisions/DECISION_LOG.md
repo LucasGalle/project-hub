@@ -9,7 +9,6 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | ID | Vraag | Opties | Voorstel van Claude | Status |
 |---|---|---|---|---|
 | PH-DEC-007 | Voor wie is dit? | alleen Lucas · klein team · product voor kmo's | eerst alleen Lucas, zo gebouwd dat teams later kunnen | NEEDS_INPUT |
-| PH-DEC-008 | Zijn de flows juist? | goedkeuren · aanpassen | `03-flows/` | NEEDS_INPUT |
 | PH-DEC-005 | Welke bronnen en functies in v1? | zie capability map | Slack, Asana, Calendar; Vandaag, Focusronde, Beslissen | NEEDS_INPUT |
 | PH-DEC-012 | Wat moet het voortgangsdashboard tonen over de Pro-credits? | (a) voortgang per milestone + geschatte inspanning · (b) ook manueel ingegeven creditverbruik · (c) automatisch verbruik (niet beschikbaar via een API, INFERENTIE) | (a) + (b) | NEEDS_INPUT |
 | PH-DEC-009 | Hoe vaak syncen? | elk uur · 3× per dag · alleen 's ochtends + manueel | 3× per dag + manueel | NEEDS_INPUT |
@@ -28,6 +27,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-003 | Werkvolgorde: flows → architectuur → stackkeuze → bouwen in kleine milestones | SRC-REQ-002 | APPROVED |
 | PH-DEC-004 | Het prototype v8 is het doeldesign | SRC-REQ-001, SRC-DES-001 | APPROVED |
 | PH-DEC-006 | Tech stack: optie B, Cloudflare alles-in-één (Workers/Pages, D1, Cron Triggers). Gratis tijdens bouwen, ± $5/m (Workers Paid) bij commercieel gebruik; login en realtime bouwen we zelf | keuze van Lucas in de projectthread, 2026-10-18 | APPROVED |
+| PH-DEC-008 | Flows PH-FLOW-001 t/m 010 en de logische architectuur zijn goedgekeurd; open vragen in de flows blijven open beslissingen | bericht van Lucas "Gelezen en goedgekeurd", 2026-10-18 17:36 | APPROVED |
 | PH-DEC-015 | Er komt een live voortgangsdashboard van dit project, gevoed door `project-status.json` | SRC-REQ-002 | APPROVED (inhoud: PH-DEC-012) |
 
 Detail per beslissing kan in `open/` of `approved/` met `templates/decision-template.md` wanneer een tabelrij niet volstaat.
