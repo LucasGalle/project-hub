@@ -167,6 +167,10 @@
     "monthly_ai_now": 0,
     "resources": [
       {
+        "name": "Cloudflare Worker project-hub (dashboard)",
+        "monthly": 0
+      },
+      {
         "name": "GitHub-repo",
         "monthly": 0
       },
@@ -181,6 +185,10 @@
     "pro_plan_usage_pct_manual": null
   },
   "log": [
+    {
+      "date": "2026-10-18",
+      "text": "Dashboard gepubliceerd als Cloudflare Worker project-hub (build geslaagd); app wordt getrouwe kopie van het design (PH-DEC-017)"
+    },
     {
       "date": "2026-10-18",
       "text": "Voortgangsdashboard gebouwd en getest; wacht op koppeling met Cloudflare Pages"
