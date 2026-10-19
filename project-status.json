@@ -73,8 +73,8 @@
   ],
   "decisions_waiting": [
     {
-      "id": "PH-DEC-018",
-      "question": "Hoe log je in?"
+      "id": "PH-DEC-019",
+      "question": "Waar komt de uitlogknop?"
     },
     {
       "id": "PH-DEC-007",
@@ -224,6 +224,10 @@
     {
       "date": "2026-10-19",
       "text": "M2a afgerond: schermen van het design live op project-hub-app.lucas-galle1.workers.dev, bevestigd door Lucas"
+    },
+    {
+      "date": "2026-10-19",
+      "text": "Lucas kiest inloggen met Google (PH-DEC-018); aanpak M2b beschreven"
     }
   ],
   "stack": {

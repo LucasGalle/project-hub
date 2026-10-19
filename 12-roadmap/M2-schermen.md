@@ -1,6 +1,6 @@
 # M2 — Skelet met demodata
 
-**Status:** DONE (M2a, 2026-10-19) · **Inspanning:** M · **Hangt af van:** M1 (DONE), PH-DEC-016 (login zelf bouwen), PH-DEC-017 (getrouwe kopie)
+**Status:** M2a DONE (2026-10-19) · M2b IN_PROGRESS · **Inspanning:** M · **Hangt af van:** M1 (DONE), PH-DEC-016 (login zelf bouwen), PH-DEC-017 (getrouwe kopie)
 
 Opgesplitst op vraag van Lucas (2026-10-18):
 
@@ -33,3 +33,50 @@ Geen. Wat het prototype doet met demodata (beslissen, ongedaan maken, sync) doet
 - Live: https://project-hub-app.lucas-galle1.workers.dev (Worker `project-hub-app`, rootmap `app`, $0).
 - AC-001..004: Playwright-test `app/tests/screens.test.cjs` groen; schermafbeeldingen in de projectbestanden (`app-schermen/`).
 - AC-005 en getrouwheid: op 2026-10-19 door Lucas bevestigd ("Yes het klopt!").
+
+## M2b — Login met Google
+
+**Status:** IN_PROGRESS · **Beslissingen:** PH-DEC-016 (zelf bouwen), PH-DEC-018 (Google)
+
+### Aanpak
+
+- De Worker `project-hub-app` krijgt een klein script (`app/src/worker.js`) dat vóór elk bestand controleert of je ingelogd bent. Niet ingelogd: je ziet het loginscherm.
+- "Inloggen met Google" volgt de standaard OpenID Connect-stappen (met `state` en PKCE tegen misbruik). We vragen alleen je naam en e-mailadres (`openid email profile`), geen toegang tot Gmail, Agenda of Drive; dat komt pas bij de bronnen (M4, PH-FLOW-008).
+- Wie mag binnen: alleen e-mailadressen op een lijst (`ALLOWED_EMAILS`), nu enkel Lucas. Dat volgt het voorstel bij PH-DEC-007 (eerst alleen Lucas). Het e-mailadres moet bij Google bevestigd zijn.
+- Sessie: een ondertekende cookie (HMAC-SHA256), 30 dagen geldig, `HttpOnly`, `Secure`, `SameSite=Lax`. Geen database nodig, dus geen extra dienst en $0. Alle sessies intrekken kan door `SESSION_SECRET` te veranderen.
+- Uitloggen via het adres `/auth/logout`. Een knop komt er pas na PH-DEC-019, want het design heeft er geen.
+- Ontbreken de geheime instellingen, dan blijft de app dicht en toont het loginscherm dat de login nog niet ingesteld is (veilig falen).
+- Preview-builds van andere branches hebben een ander adres, dat Google niet kent; daar werkt inloggen niet. Bewust zo gelaten.
+
+### Loginscherm (PH-DEC-017)
+
+Het prototype heeft geen loginscherm. Het scherm wordt gebouwd met uitsluitend de bestaande stijl van het design (achtergrond met bollen, `panel`, `brand-mark`, `btn btn-primary btn-lg`, lettertypes en kleuren uit `styles.css`), met een minimaal eigen stukje CSS voor het centreren. Lucas keurde het goed via schermafbeeldingen op 2026-10-19.
+
+### Wat Lucas instelt (eenmalig, gratis)
+
+1. Google Cloud Console: project aanmaken, OAuth-toestemmingsscherm (type External), OAuth-client van het type Web application met als redirect-adres `https://project-hub-app.lucas-galle1.workers.dev/auth/callback`.
+2. Cloudflare, Worker `project-hub-app`, Settings › Variables and Secrets, vier geheimen: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET` (lange willekeurige tekst), `ALLOWED_EMAILS` (je e-mailadres; meerdere gescheiden door komma's).
+
+Geheimen komen nooit in de repo (die is publiek) en nooit in de chat.
+
+### Acceptatiecriteria M2b
+
+- AC-006: zonder sessie toont elk adres van de app het loginscherm; de schermen en hun bestanden zijn niet bereikbaar.
+- AC-007: "Inloggen met Google" stuurt naar Google met `state` en PKCE; een terugkeer met een foute of ontbrekende `state` wordt geweigerd.
+- AC-008: een Google-account dat niet op de lijst staat of geen bevestigd e-mailadres heeft, komt niet binnen en ziet een duidelijke melding.
+- AC-009: een toegelaten account komt op Vandaag; een vervalste of verlopen cookie wordt geweigerd.
+- AC-010: `/auth/logout` wist de sessie en toont het loginscherm.
+- AC-011: zonder ingestelde geheimen blijft de app dicht met de melding dat de login nog niet ingesteld is.
+- AC-012: het loginscherm gebruikt enkel de stijl van het design en is goedgekeurd door Lucas.
+- AC-013: kost blijft $0 (Cloudflare gratis plan, Google-login gratis).
+
+### Tests
+
+`app/tests/auth.test.mjs` test de Worker zonder netwerk (Google wordt nagebootst): AC-006 t/m AC-011, positief en negatief.
+
+### Stand M2b (2026-10-19)
+
+- Gebouwd in de branch `m2b-google-login`: `app/src/worker.js`, `app/public/login.html`, `app/public/login.css`, `app/wrangler.jsonc` (script + `run_worker_first`).
+- AC-006 t/m AC-011: `node --test app/tests/auth.test.mjs`, 15 tests groen; ook lokaal nagekeken in de echte Cloudflare-runtime (`wrangler dev`): zonder sessie 401 + loginscherm, met geldige sessie de app.
+- AC-012: schermafbeeldingen `app-schermen/login-desktop.png`, `login-gsm.png`, `login-melding.png` in de projectbestanden; goedgekeurd door Lucas op 2026-10-19 ("Goedgekeurd").
+- Nog open: Google- en Cloudflare-instellingen door Lucas, daarna een echte login op het live adres.
