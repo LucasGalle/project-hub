@@ -8,7 +8,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 
 | ID | Vraag | Opties | Voorstel van Claude | Status |
 |---|---|---|---|---|
-| PH-DEC-018 | Hoe log je in? (M2b) | Google · e-maillink · passkey · e-mail + wachtwoord (kosten in PH-FLOW-009) | Google | NEEDS_INPUT |
+| PH-DEC-019 | Waar komt de knop om uit te loggen? Het design heeft er geen | onder de naam onderaan de zijbalk · in de instellingen · geen knop, alleen het adres /auth/logout | voorlopig alleen het adres; knop pas na jouw ontwerp of akkoord | NEEDS_INPUT |
 | PH-DEC-007 | Voor wie is dit? | alleen Lucas · klein team · product voor kmo's | eerst alleen Lucas, zo gebouwd dat teams later kunnen | NEEDS_INPUT |
 | PH-DEC-005 | Welke bronnen en functies in v1? | zie capability map | Slack, Asana, Calendar; Vandaag, Focusronde, Beslissen | NEEDS_INPUT |
 | PH-DEC-012 | Wat moet het voortgangsdashboard tonen over de Pro-credits? | (a) voortgang per milestone + geschatte inspanning · (b) ook manueel ingegeven creditverbruik · (c) automatisch verbruik (niet beschikbaar via een API, INFERENTIE) | (a) + (b) | NEEDS_INPUT |
@@ -27,6 +27,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-004 | Het prototype v8 is het doeldesign | SRC-REQ-001, SRC-DES-001 | APPROVED |
 | PH-DEC-006 | Tech stack: optie B, Cloudflare alles-in-één (Workers/Pages, D1, Cron Triggers). Gratis tijdens bouwen, ± $5/m (Workers Paid) bij commercieel gebruik; login en realtime bouwen we zelf | keuze van Lucas in de projectthread, 2026-10-18 | APPROVED |
 | PH-DEC-008 | Flows PH-FLOW-001 t/m 010 en de logische architectuur zijn goedgekeurd; open vragen in de flows blijven open beslissingen | bericht van Lucas "Gelezen en goedgekeurd", 2026-10-18 17:36 | APPROVED |
+| PH-DEC-018 | Inloggen gebeurt met Google (opties en kosten in PH-FLOW-009) | keuze van Lucas op de beslissingskaart in de projectthread, 2026-10-19 | APPROVED |
 | PH-DEC-017 | De app wordt een unieke, getrouwe kopie van Lucas' uitgewerkte design (prototype v8): zelfde schermen, layout, kleuren, lettertypes, beweging en teksten. Afwijken mag alleen na goedkeuring van Lucas | bericht van Lucas in de projectchat, 2026-10-18 18:47 | APPROVED |
 | PH-DEC-016 | De login bouwen we zelf (geen externe logindienst). Methode (bv. Google-login of e-maillink) wordt uitgewerkt in M2b/PH-FLOW-009 | bericht van Lucas, 2026-10-18 18:57 | APPROVED |
 | PH-DEC-013 | De code staat in deze repo, map `app/` (standaardvoorstel toegepast; Lucas kan dit nog wijzigen) | voorstel Claude, door Lucas niet tegengesproken | APPROVED |

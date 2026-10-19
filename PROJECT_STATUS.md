@@ -7,7 +7,7 @@
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
 - M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
 - M2a DONE: alle schermen van het design staan live op https://project-hub-app.lucas-galle1.workers.dev (PR #1, commit dcd96eb), door Lucas bevestigd als getrouwe kopie (PH-DEC-017).
-- M2b bezig: zelfgebouwde login (PH-DEC-016); opties en kosten staan in PH-FLOW-009; wacht op keuze van Lucas (PH-DEC-018).
+- M2b bezig: zelfgebouwde login (PH-DEC-016); Lucas koos inloggen met Google (PH-DEC-018); aanpak en acceptatiecriteria in `12-roadmap/M2-schermen.md`.
 
 ## Wacht op Lucas
 
@@ -37,6 +37,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-19 — Lucas kiest inloggen met Google (PH-DEC-018); aanpak M2b beschreven.
 - 2026-10-19 — M2a afgerond: app live op Worker `project-hub-app`, door Lucas bevestigd.
 - 2026-10-19 — PR #1 (M2a, schermen) gemerged op vraag van Lucas.
 - 2026-10-18 — M2a: schermen van het design als app gebouwd en getest; PH-DEC-016 (login zelf bouwen) en PH-DEC-013 (code in `app/`) vastgelegd.

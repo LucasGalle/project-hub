@@ -24,7 +24,7 @@ flowchart TD
 - **PH-DEC-007**: is dit een tool voor Lucas alleen, voor een klein team, of een product voor klanten? Dat bepaalt of er accounts, teams, rollen en betalingen nodig zijn.
 - Inloggen met Google (handig omdat Gmail, Agenda en Drive toch Google zijn) of met e-mail en link?
 
-## Loginmethode: opties (PH-DEC-018, NEEDS_INPUT)
+## Loginmethode: opties (PH-DEC-018, gekozen: A, Google)
 
 Vastgelegd: we bouwen de login zelf op Cloudflare (PH-DEC-016). Een externe logindienst (bv. Cloudflare Access, Auth0, Clerk) valt daarom af. Elke optie hieronder draait op de bestaande Worker; sessies bewaren we in Cloudflare D1 of KV (gratis plan).
 
@@ -41,4 +41,4 @@ Vastgelegd: we bouwen de login zelf op Cloudflare (PH-DEC-016). Een externe logi
 
 Prijzen: Google-login en passkeys hebben geen gebruikskost. Gratis e-maillimieten van Resend en Cloudflare Email zijn `UNSOURCED` en worden gecontroleerd met datum als Lucas voor B of D kiest.
 
-**Voorstel Claude:** A, inloggen met Google. Het kost niets, is het minste eigen werk en de app heeft voor de bronnen toch al een Google-koppeling nodig. Lucas beslist.
+**Gekozen door Lucas (2026-10-19):** A, inloggen met Google. Uitwerking en bouw: M2b in `12-roadmap/M2-schermen.md`. De welkomstappen voor de eerste keer (W1–W4 hierboven) komen pas met de bronnen in M4.
