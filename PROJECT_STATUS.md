@@ -7,7 +7,7 @@
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
 - M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
 - M2a DONE: alle schermen van het design staan live op https://project-hub-app.lucas-galle1.workers.dev (PR #1, commit dcd96eb), door Lucas bevestigd als getrouwe kopie (PH-DEC-017).
-- M2b bezig: zelfgebouwde login (PH-DEC-016); eerst de methode en kostprijs uitwerken in PH-FLOW-009.
+- M2b bezig: zelfgebouwde login (PH-DEC-016); opties en kosten staan in PH-FLOW-009; wacht op keuze van Lucas (PH-DEC-018).
 
 ## Wacht op Lucas
 

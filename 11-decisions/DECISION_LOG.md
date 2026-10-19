@@ -1,6 +1,6 @@
 # Decision log
 
-**Last updated:** 2026-10-18 · Statussen: `PROPOSED`, `NEEDS_INPUT`, `APPROVED`, `REJECTED`, `SUPERSEDED` (zie `00-governance/decision-process.md`).
+**Last updated:** 2026-10-19 · Statussen: `PROPOSED`, `NEEDS_INPUT`, `APPROVED`, `REJECTED`, `SUPERSEDED` (zie `00-governance/decision-process.md`).
 
 Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten staan bovenaan.
 
@@ -8,6 +8,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 
 | ID | Vraag | Opties | Voorstel van Claude | Status |
 |---|---|---|---|---|
+| PH-DEC-018 | Hoe log je in? (M2b) | Google · e-maillink · passkey · e-mail + wachtwoord (kosten in PH-FLOW-009) | Google | NEEDS_INPUT |
 | PH-DEC-007 | Voor wie is dit? | alleen Lucas · klein team · product voor kmo's | eerst alleen Lucas, zo gebouwd dat teams later kunnen | NEEDS_INPUT |
 | PH-DEC-005 | Welke bronnen en functies in v1? | zie capability map | Slack, Asana, Calendar; Vandaag, Focusronde, Beslissen | NEEDS_INPUT |
 | PH-DEC-012 | Wat moet het voortgangsdashboard tonen over de Pro-credits? | (a) voortgang per milestone + geschatte inspanning · (b) ook manueel ingegeven creditverbruik · (c) automatisch verbruik (niet beschikbaar via een API, INFERENTIE) | (a) + (b) | NEEDS_INPUT |
