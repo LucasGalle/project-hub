@@ -73,3 +73,10 @@ Geheimen komen nooit in de repo (die is publiek) en nooit in de chat.
 ### Tests
 
 `app/tests/auth.test.mjs` test de Worker zonder netwerk (Google wordt nagebootst): AC-006 t/m AC-011, positief en negatief.
+
+### Stand M2b (2026-10-19)
+
+- Gebouwd in de branch `m2b-google-login`: `app/src/worker.js`, `app/public/login.html`, `app/public/login.css`, `app/wrangler.jsonc` (script + `run_worker_first`).
+- AC-006 t/m AC-011: `node --test app/tests/auth.test.mjs`, 15 tests groen; ook lokaal nagekeken in de echte Cloudflare-runtime (`wrangler dev`): zonder sessie 401 + loginscherm, met geldige sessie de app.
+- AC-012: schermafbeeldingen `app-schermen/login-desktop.png`, `login-gsm.png`, `login-melding.png` in de projectbestanden; wacht op akkoord van Lucas.
+- Nog open: Google- en Cloudflare-instellingen door Lucas, daarna een echte login op het live adres.

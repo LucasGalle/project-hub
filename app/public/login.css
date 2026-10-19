@@ -1,0 +1,9 @@
+/* Alleen schikking van het loginscherm (M2b). Kleuren, lettertypes en onderdelen komen uit styles.css (PH-DEC-017). */
+.login{display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.login-card{width:100%;max-width:400px;padding:32px 28px;display:flex;flex-direction:column;gap:6px}
+.login-card .brand{padding:0;margin-bottom:22px}
+.login .login-title{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-size:38px;font-weight:600;letter-spacing:-.035em;line-height:1.05}
+.login .login-sub{margin:4px 0 18px;color:var(--text-2)}
+.login .login-msg{margin:0 0 16px;padding:10px 12px;border-radius:12px;background:var(--accent-weak);border:1px solid var(--accent-border);color:var(--accent-text)}
+.login-btn{width:100%}
+.login-btn[aria-disabled=true]{opacity:.5;pointer-events:none}

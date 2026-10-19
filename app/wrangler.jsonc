@@ -1,13 +1,18 @@
-// Cloudflare Worker die de app serveert (M2). Alleen statische bestanden, geen build nodig.
+// Cloudflare Worker die de app serveert. Het script (src/worker.js) laat alleen ingelogde gebruikers binnen (M2b).
 // Workers Builds: root directory `app`, deploy command `npx wrangler deploy`.
+// Geheimen staan in Cloudflare (Settings › Variables and Secrets), nooit in deze publieke repo.
 {
   "name": "project-hub-app",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-13",
   // Publiek adres: https://project-hub-app.lucas-galle1.workers.dev
   "workers_dev": true,
   // Nodig voor preview-builds van andere branches (npx wrangler preview)
   "previews": {},
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Het script beslist eerst, ook voor bestaande bestanden
+    "run_worker_first": true
   }
 }
