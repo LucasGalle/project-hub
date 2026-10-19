@@ -1,12 +1,12 @@
 # Project status
 
-**Last updated:** 2026-10-18 · **Fase:** M2 — skelet met demodata
+**Last updated:** 2026-10-19 · **Fase:** M2 — skelet met demodata
 
 ## Nu
 
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
 - M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
-- M2a bezig: alle schermen van het design draaien als app in `app/` (getrouwe kopie, PH-DEC-017); wacht op koppeling van Worker `project-hub-app`.
+- M2a gemerged (PR #1, commit dcd96eb): alle schermen van het design staan als app in `app/` (getrouwe kopie, PH-DEC-017); wacht op de koppeling van Worker `project-hub-app` door Lucas.
 - M2b daarna: zelfgebouwde login (PH-DEC-016).
 
 ## Wacht op Lucas
@@ -36,6 +36,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-19 — PR #1 (M2a, schermen) gemerged op vraag van Lucas.
 - 2026-10-18 — M2a: schermen van het design als app gebouwd en getest; PH-DEC-016 (login zelf bouwen) en PH-DEC-013 (code in `app/`) vastgelegd.
 - 2026-10-18 — M1 afgerond; dashboard live en bevestigd.
 - 2026-10-18 — Dashboard live via Cloudflare Worker `project-hub`; vereiste PH-DEC-017 (getrouwe kopie van het design) vastgelegd.

@@ -178,6 +178,10 @@
   },
   "log": [
     {
+      "date": "2026-10-19",
+      "text": "M2a gemerged (PR #1): schermen van het design staan in main; wacht op Worker project-hub-app"
+    },
+    {
       "date": "2026-10-18",
       "text": "M2a: alle schermen van het design draaien als app (getrouwe kopie); login wordt zelf gebouwd (PH-DEC-016)"
     },
