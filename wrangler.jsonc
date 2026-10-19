@@ -6,6 +6,8 @@
   "compatibility_date": "2026-10-13",
   // Publiek adres: https://project-hub.lucas-galle1.workers.dev
   "workers_dev": true,
+  // Nodig voor preview-builds van andere branches (npx wrangler preview)
+  "previews": {},
   "assets": {
     "directory": "./dashboard"
   }

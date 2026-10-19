@@ -1,12 +1,13 @@
 # Project status
 
-**Last updated:** 2026-10-18 · **Fase:** M2 — skelet met demodata (nog te starten)
+**Last updated:** 2026-10-18 · **Fase:** M2 — skelet met demodata
 
 ## Nu
 
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
 - M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
-- Volgende: M2, de schermen van het design getrouw omzetten (PH-DEC-017).
+- M2a bezig: alle schermen van het design draaien als app in `app/` (getrouwe kopie, PH-DEC-017); wacht op koppeling van Worker `project-hub-app`.
+- M2b daarna: zelfgebouwde login (PH-DEC-016).
 
 ## Wacht op Lucas
 
@@ -21,7 +22,8 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 |---|---|---|
 | M0 | Dossier, flows en architectuur | DONE |
 | M1 | Stackkeuze + voortgangsdashboard | DONE |
-| M2–M8 | zie `12-roadmap/milestone-map.md` | TODO |
+| M2 | Skelet met demodata (M2a schermen, M2b login) | IN_PROGRESS |
+| M3–M8 | zie `12-roadmap/milestone-map.md` | TODO |
 
 ## Aangemaakte resources
 
@@ -34,6 +36,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-18 — M2a: schermen van het design als app gebouwd en getest; PH-DEC-016 (login zelf bouwen) en PH-DEC-013 (code in `app/`) vastgelegd.
 - 2026-10-18 — M1 afgerond; dashboard live en bevestigd.
 - 2026-10-18 — Dashboard live via Cloudflare Worker `project-hub`; vereiste PH-DEC-017 (getrouwe kopie van het design) vastgelegd.
 - 2026-10-18 — Voortgangsdashboard gebouwd (`dashboard/index.html`, `dashboard/check-status.mjs`).

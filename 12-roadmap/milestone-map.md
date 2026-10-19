@@ -8,7 +8,7 @@ Kleine stappen die elk afzonderlijk af en bruikbaar zijn, zodat het werk binnen 
 |---|---|---|---|---|---|
 | M0 | Dossier, flows en architectuur | dit dossier, goedgekeurd | M | — | DONE |
 | M1 | Stackkeuze + voortgangsdashboard | PH-DEC-006 beslist (Cloudflare); dashboard toont `project-status.json` live | S | M0, PH-DEC-012 | DONE |
-| M2 | Skelet met demodata | inloggen + alle schermen uit het prototype, nog met demodata | M | M1 | TODO |
+| M2 | Skelet met demodata | M2a: alle schermen uit het prototype met demodata · M2b: zelfgebouwde login | M | M1, PH-DEC-016 | IN_PROGRESS |
 | M3 | Eigen data en beslissen | projecten en voorstellen in de database; beslissen, later, afwijzen, ongedaan maken | M | M2 | TODO |
 | M4 | Eerste bron + AI-voorstellen | één bron (voorstel: Asana of Slack) lezen, voorstellen door het AI-model, kost per sync zichtbaar | L | M3, PH-DEC-005, PH-DEC-014 | TODO |
 | M5 | Eerste actie uitvoeren | één actietype echt uitvoeren (voorstel: to-do in Asana) met ongedaan maken | M | M4 | TODO |

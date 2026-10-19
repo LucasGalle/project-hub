@@ -14,9 +14,7 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-009 | Hoe vaak syncen? | elk uur · 3× per dag · alleen 's ochtends + manueel | 3× per dag + manueel | NEEDS_INPUT |
 | PH-DEC-010 | Wat bewaren we van mails/berichten? | alleen link + samenvatting · volledige tekst | link + samenvatting | NEEDS_INPUT |
 | PH-DEC-011 | Mails versturen of als concept klaarzetten? | versturen · concept in Gmail | concept in v1 | NEEDS_INPUT |
-| PH-DEC-013 | Waar komt de code? | in deze repo (map `app/`) · aparte repo | deze repo | NEEDS_INPUT |
 | PH-DEC-014 | Welk AI-model? | Haiku · Sonnet · mix | mix Haiku + Sonnet | NEEDS_INPUT |
-| PH-DEC-016 | Hoe bouwen we de login op Cloudflare? | zelf Google-login (OAuth) bouwen · open-source loginbibliotheek · externe logindienst (kost te bekijken) | uit te werken met kosten vóór M2 | NEEDS_INPUT |
 
 ## Beslist
 
@@ -29,6 +27,8 @@ Alleen Lucas zet een beslissing op `APPROVED`. Beslissingen die op hem wachten s
 | PH-DEC-006 | Tech stack: optie B, Cloudflare alles-in-één (Workers/Pages, D1, Cron Triggers). Gratis tijdens bouwen, ± $5/m (Workers Paid) bij commercieel gebruik; login en realtime bouwen we zelf | keuze van Lucas in de projectthread, 2026-10-18 | APPROVED |
 | PH-DEC-008 | Flows PH-FLOW-001 t/m 010 en de logische architectuur zijn goedgekeurd; open vragen in de flows blijven open beslissingen | bericht van Lucas "Gelezen en goedgekeurd", 2026-10-18 17:36 | APPROVED |
 | PH-DEC-017 | De app wordt een unieke, getrouwe kopie van Lucas' uitgewerkte design (prototype v8): zelfde schermen, layout, kleuren, lettertypes, beweging en teksten. Afwijken mag alleen na goedkeuring van Lucas | bericht van Lucas in de projectchat, 2026-10-18 18:47 | APPROVED |
+| PH-DEC-016 | De login bouwen we zelf (geen externe logindienst). Methode (bv. Google-login of e-maillink) wordt uitgewerkt in M2b/PH-FLOW-009 | bericht van Lucas, 2026-10-18 18:57 | APPROVED |
+| PH-DEC-013 | De code staat in deze repo, map `app/` (standaardvoorstel toegepast; Lucas kan dit nog wijzigen) | voorstel Claude, door Lucas niet tegengesproken | APPROVED |
 | PH-DEC-015 | Er komt een live voortgangsdashboard van dit project, gevoed door `project-status.json` | SRC-REQ-002 | APPROVED (inhoud: PH-DEC-012) |
 
 Detail per beslissing kan in `open/` of `approved/` met `templates/decision-template.md` wanneer een tabelrij niet volstaat.

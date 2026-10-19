@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Template letterlijk overgenomen uit het prototype v8 (SRC-DES-001). -->
+<template id="dc-template">
+<div class="app" data-theme="{{theme}}" ref="{{rootRef}}" onMouseMove="{{onPar}}">
+<div class="bg" aria-hidden="true"><div class="dots"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<sc-if value="{{showLoader}}" hint-placeholder-val="{{false}}">
+  <div class="loader {{loaderCls}}" role="status" aria-label="Project Hub wordt geladen">
+    <div class="cube-wrap"><div class="cube"><span></span><span></span><span></span><span></span></div></div>
+    <div style="text-align: center">
+      <div class="disp" style="font-size: 28px; font-weight: 600">Goedemorgen, Lucas</div>
+      <div class="muted" style="margin-top: 4px">De agent leest je bronnen…</div>
+    </div>
+    <div class="loader-src">
+      <sc-for list="{{loaderSrc}}" as="s" hint-placeholder-count="7"><span style="animation-delay: {{s.delay}}ms" title="{{s.name}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span></sc-for>
+    </div>
+    <div class="loader-bar"><span></span></div>
+  </div>
+</sc-if>
+
+<sc-if value="{{showShell}}" hint-placeholder-val="{{true}}">
+<div class="shell">
+
+<aside class="side rv {{sideCls}}" aria-label="Navigatie">
+  <div class="brand">
+    <div class="brand-mark"><svg class="ic ic-l" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"></path></svg></div>
+    <div class="hide-rail"><div class="brand-name">Project Hub</div><div class="brand-sub">The AI Platform</div></div>
+  </div>
+  <nav class="nav">
+    <span class="nav-pill" style="transform: translateY({{navY}}px); opacity: {{navO}}" aria-hidden="true"></span>
+    <sc-for list="{{mainNav}}" as="n" hint-placeholder-count="4">
+      <button class="nav-item {{n.on}}" onClick="{{n.go}}" title="{{n.label}}" aria-current="{{n.cur}}">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.icon}}"></path></svg>
+        <span class="grow lbl">{{n.label}}</span>
+        <sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{false}}"><span class="badge {{n.badgeCls}}">{{n.badge}}</span></sc-if>
+      </button>
+    </sc-for>
+  </nav>
+  <nav class="nav">
+    <div class="nav-label hide-rail">Projecten</div>
+    <sc-for list="{{navProjects}}" as="np" hint-placeholder-count="4">
+      <button class="nav-item {{np.on}}" onClick="{{np.go}}" title="{{np.name}}">
+        <span style="width: 16px; display: inline-flex; justify-content: center"><span class="dot {{np.health}}" aria-hidden="true"></span></span>
+        <span class="grow lbl">{{np.name}}</span>
+        <sc-if value="{{np.hasOpen}}" hint-placeholder-val="{{true}}"><span class="badge badge-soft">{{np.open}}</span></sc-if>
+      </button>
+    </sc-for>
+  </nav>
+  <div class="side-foot">
+    <div class="agentcard hide-rail">
+      <span class="wave" aria-hidden="true"></span>
+      <div class="row g8 small" style="font-weight: 600; position: relative"><span class="dot ok live" aria-hidden="true"></span>Agent actief</div>
+      <div class="small muted" style="position: relative">Leest 7 bronnen. Stelt voor, jij beslist.</div>
+    </div>
+    <div class="me">
+      <span class="avatar" style="background: var(--accent); color: var(--on-accent); border-color: transparent">LG</span>
+      <div class="grow hide-rail"><div style="font-weight: 600; font-size: 13px">Lucas Galle</div><div class="small muted">Projectmanager</div></div>
+    </div>
+    <div class="row g6" style="justify-content: center">
+      <button class="btn btn-ghost btn-sm btn-icon" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}">
+        <sc-if value="{{isDark}}" hint-placeholder-val="{{false}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+        <sc-if value="{{isLight}}" hint-placeholder-val="{{true}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></sc-if>
+      </button>
+      <button class="btn btn-ghost btn-sm btn-icon" onClick="{{toggleRail}}" aria-label="{{railLabel}}" title="{{railLabel}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{{railIcon}}"></path></svg></button>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar rv" style="animation-delay: 80ms">
+    <div class="crumb"><span>{{crumbA}}</span><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg><b>{{crumbB}}</b></div>
+    <div class="pill">
+      <sc-if value="{{syncing}}" hint-placeholder-val="{{false}}"><span class="dot warn live" aria-hidden="true"></span><span>Bronnen worden gelezen…</span></sc-if>
+      <sc-if value="{{notSyncing}}" hint-placeholder-val="{{true}}"><span class="dot ok" aria-hidden="true"></span><span>Laatste sync <b class="mono" style="color: var(--text)">{{lastSync}}</b></span></sc-if>
+    </div>
+    <button class="btn btn-sm" onClick="{{onSync}}"><svg class="ic ic-s {{spinCls}}" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"></path></svg>Synchroniseer</button>
+    <sc-if value="{{syncing}}" hint-placeholder-val="{{false}}"><div class="syncbar"><span></span></div></sc-if>
+  </header>
+
+  <sc-if value="{{transit}}" hint-placeholder-val="{{false}}">
+    <main class="content" aria-busy="true"><div class="skel"><div class="sk wide"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></main>
+  </sc-if>
+
+  <sc-if value="{{showScreens}}" hint-placeholder-val="{{true}}">
+  <!-- ===================== VANDAAG ===================== -->
+  <sc-if value="{{isVandaag}}" hint-placeholder-val="{{true}}">
+  <main class="content">
+    <section class="panel hero rv" style="animation-delay: 120ms" aria-label="Vandaag">
+      <div class="hero-text">
+        <div class="eyebrow">Maandag 5 oktober</div>
+        <h1>
+          <span class="line"><span style="animation-delay: 250ms">Goedemorgen, Lucas.</span></span>
+          <span class="line"><span style="animation-delay: 380ms">Vandaag vraagt <em>±{{focusMins}} min</em> van je.</span></span>
+        </h1>
+        <p class="lede rv" style="animation-delay: 520ms">{{heroLede}}</p>
+        <div class="hero-cta rv" style="animation-delay: 640ms">
+          <button class="btn btn-primary btn-lg magnet" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{startFocus}}">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l12 8-12 8z"></path></svg>Start je focusronde<svg class="ic arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </button>
+          <button class="btn btn-lg btn-ghost" onClick="{{toggleDay}}">Eerst mijn dag bekijken</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="layer" style="left: 0; top: 6px; transform: translate3d(calc(var(--px,0) * -22px), calc(var(--py,0) * -16px), 0)">
+          <div class="fcard rv" style="animation: reveal .8s .5s both, float 6s 1.3s ease-in-out infinite">
+            <div class="row g8"><span class="fnum" style="background: var(--crit-fill)">1</span><span class="k">Wat brandt</span></div>
+            <div class="t">SharePoint-toegang Zorgnet</div>
+            <div><span class="tag crit">Geblokkeerd · 11 dagen</span></div>
+          </div>
+        </div>
+        <div class="layer" style="left: 70px; top: 96px; transform: translate3d(calc(var(--px,0) * 14px), calc(var(--py,0) * 10px), 0)">
+          <div class="fcard" style="animation: reveal .8s .65s both, float 7s 1.5s ease-in-out infinite">
+            <div class="row g8"><span class="fnum">2</span><span class="k">Beslissen</span></div>
+            <div class="t">{{openTotal}} voorstellen van de agent</div>
+            <div class="bar acc"><span style="width: 34%"></span></div>
+          </div>
+        </div>
+        <div class="layer" style="left: 30px; top: 186px; transform: translate3d(calc(var(--px,0) * 30px), calc(var(--py,0) * 22px), 0)">
+          <div class="fcard" style="width: 220px; animation: reveal .8s .8s both, float 5.5s 1.7s ease-in-out infinite">
+            <div class="row g8"><span class="fnum" style="background: var(--warn-fill)">3</span><span class="k">Opvolgen</span><span class="avatar avatar-xs" style="margin-left: auto">AE</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{dayOpen}}" hint-placeholder-val="{{false}}">
+      <section class="panel daylist" aria-label="Dagplanning">
+        <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v15H4zM4 10h16M8 3v4M16 3v4"></path></svg></span><h2 class="grow">Je dag</h2><button class="btn btn-ghost btn-sm" onClick="{{toggleDay}}">Sluiten</button></div>
+        <div class="cols" style="padding: 0 10px 14px">
+          <div class="list grow" style="min-width: 280px">
+            <div class="sub-h" style="margin: 0 10px 6px">Meetings</div>
+            <sc-for list="{{meetingsToday}}" as="m" hint-placeholder-count="4">
+              <button class="lrow" style="border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; width: 100%" onClick="{{m.go}}"><span class="mono" style="min-width: 44px; padding-top: 1px">{{m.time}}</span><span class="grow"><span style="display: block; font-weight: 500">{{m.title}}</span><span class="small muted">{{m.sub}}</span></span></button>
+            </sc-for>
+          </div>
+          <div class="list grow" style="min-width: 280px">
+            <div class="sub-h" style="margin: 0 10px 6px">Deadlines deze week</div>
+            <sc-for list="{{deadlinesWeek}}" as="d" hint-placeholder-count="5">
+              <button class="lrow" style="border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; width: 100%" onClick="{{d.go}}"><span class="due {{d.cls}}" style="min-width: 62px; padding-top: 1px">{{d.day}}</span><span class="grow"><span style="display: block; font-weight: 500">{{d.title}}</span><span class="small muted">{{d.sub}}</span></span></button>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <div class="row wrap g12 rv" style="justify-content: space-between; animation-delay: 700ms">
+      <h2 class="disp" style="font-size: 22px; font-weight: 600">Je ronde in vier stappen</h2>
+      <span class="small muted">Je kunt bij elke stap beginnen</span>
+    </div>
+    <div class="steps4">
+      <sc-for list="{{flowSteps}}" as="s" hint-placeholder-count="4">
+        <button class="stepcard tilt rv {{s.cls}}" style="animation-delay: {{s.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}" onClick="{{s.go}}">
+          <span class="go" aria-hidden="true"><svg class="ic ic-s" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+          <span class="bigic z2"><svg class="ic ic-l" viewBox="0 0 24 24" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span>
+          <span class="z1" style="display: flex; flex-direction: column; gap: 4px">
+            <span class="num">Stap {{s.num}}</span>
+            <span class="ttl">{{s.title}}</span>
+            <span class="small" style="color: var(--text-2)">{{s.sub}}</span>
+          </span>
+          <span class="meta z1"><span class="tag {{s.tagCls}}">{{s.count}}</span><span>{{s.time}}</span></span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div class="calm">
+      <div class="panel nextmeet rv" style="animation-delay: 1000ms">
+        <div class="date today"><small>Ma</small><b>5</b></div>
+        <div class="grow">
+          <div class="small muted">Volgende meeting</div>
+          <div style="font-weight: 600; font-size: 15px">Korte klantcall Dewaele</div>
+          <div class="small muted">Pieter Dewaele · Offerte-assistent</div>
+        </div>
+        <div style="text-align: right"><div class="bigtime">11:00</div><button class="link small" onClick="{{prepMeeting}}">Voorbereiden →</button></div>
+      </div>
+      <div class="panel rv" style="animation-delay: 1080ms; padding: 16px 18px">
+        <div class="row g8" style="margin-bottom: 8px"><span class="small muted grow">Projecten in één oogopslag</span><button class="link small" onClick="{{goProjecten}}">Alle projecten →</button></div>
+        <sc-for list="{{glance}}" as="g" hint-placeholder-count="4">
+          <button class="lrow" style="border: 0; background: none; text-align: left; cursor: pointer; font: inherit; color: inherit; width: 100%; padding: 7px 8px; align-items: center" onClick="{{g.go}}">
+            <span class="dot {{g.health}}" aria-hidden="true"></span><span class="grow" style="font-weight: 500">{{g.name}}</span><span class="small muted">{{g.phase}}</span><span class="mono muted" style="min-width: 36px; text-align: right">{{g.progress}}%</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+  <!-- ===================== FOCUSRONDE ===================== -->
+  <sc-if value="{{isFocus}}" hint-placeholder-val="{{false}}">
+  <main class="content" style="max-width: 980px">
+    <div class="focus-top rv">
+      <div class="stepper" role="list" aria-label="Stappen">
+        <sc-for list="{{fSteps}}" as="s" hint-placeholder-count="4">
+          <sc-if value="{{s.notFirst}}" hint-placeholder-val="{{true}}"><span class="st-line" aria-hidden="true"></span></sc-if>
+          <button class="st {{s.cls}}" onClick="{{s.go}}" role="listitem" aria-current="{{s.cur}}"><i>{{s.mark}}</i><span>{{s.label}}</span></button>
+        </sc-for>
+      </div>
+      <button class="btn btn-ghost btn-sm" onClick="{{pauseFocus}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"></path></svg>Pauzeren</button>
+    </div>
+
+    <!-- stap 1 -->
+    <sc-if value="{{fs0}}" hint-placeholder-val="{{true}}">
+      <div class="focus-stage">
+        <div class="focus-head rv {{stepFlip}}">
+          <span class="tag crit">Stap 1 van 4</span>
+          <h1><span class="line"><span>Eerst wat brandt.</span></span></h1>
+          <p>Dit houdt je team nu tegen. Pak het aan of zet het bewust opzij, dan wordt de rest van je dag lichter.</p>
+        </div>
+        <div class="flist">
+          <sc-for list="{{fires}}" as="f" hint-placeholder-count="2">
+            <div class="panel fireitem tilt rv {{f.cls}}" style="animation-delay: {{f.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+              <span class="fi {{f.icCls}} z1"><svg class="ic ic-l" viewBox="0 0 24 24" aria-hidden="true"><path d="{{f.icon}}"></path></svg></span>
+              <div class="grow z1" style="display: flex; flex-direction: column; gap: 8px">
+                <div class="row g8 wrap small muted"><span class="dot {{f.health}}" aria-hidden="true"></span>{{f.project}}<span class="tag {{f.tagCls}}">{{f.tag}}</span></div>
+                <div class="disp" style="font-size: 19px; font-weight: 600">{{f.title}}</div>
+                <div class="item-d">{{f.sub}}</div>
+                <sc-if value="{{f.open}}" hint-placeholder-val="{{true}}">
+                  <div class="acts" style="margin-top: 4px">
+                    <button class="btn btn-primary btn-sm" onClick="{{f.act}}">{{f.actLabel}}<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+                    <button class="btn btn-sm" onClick="{{f.view}}">Bekijk project</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{f.later}}">Bewust later</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{f.handled}}" hint-placeholder-val="{{false}}"><div class="row g8 small" style="color: var(--ok)"><span class="okc" style="width: 20px; height: 20px"><svg class="ic" style="width: 11px; height: 11px; stroke-width: 3" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>{{f.doneLabel}}</div></sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="fnav"><button class="btn btn-primary btn-lg magnet" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{fNext}}">Verder naar beslissen<svg class="ic arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></div>
+      </div>
+    </sc-if>
+
+    <!-- stap 2 -->
+    <sc-if value="{{fs1}}" hint-placeholder-val="{{false}}">
+      <div class="focus-stage" tabIndex="0" ref="{{focusRef}}" onKeyDown="{{onStackKey}}" style="outline: none">
+        <div class="focus-head rv {{stepFlip}}">
+          <span class="tag acc">Stap 2 van 4</span>
+          <h1><span class="line"><span>Beslis één voor één.</span></span></h1>
+          <p>{{qText}}</p>
+        </div>
+        <sc-if value="{{hasQueue}}" hint-placeholder-val="{{true}}">
+          <div class="fstack">
+            <sc-for list="{{stackCards}}" as="c" hint-placeholder-count="3">
+              <article class="fcardx {{c.cls}}" aria-hidden="{{c.hidden}}">
+                <div class="row g8 wrap">
+                  <span class="tag {{c.kindCls}}">{{c.kindLabel}}</span>
+                  <span class="small muted row g6"><span class="dot {{c.health}}" aria-hidden="true"></span>{{c.projectName}}</span>
+                  <span class="grow"></span>
+                  <span class="mono muted">{{c.pos}}</span>
+                </div>
+                <h2>{{c.title}}</h2>
+                <div class="quote">{{c.detail}}</div>
+                <div class="row g8 wrap">
+                  <span class="src"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{c.src.icon}}"></path></svg><b>{{c.src.type}}</b>{{c.src.label}} · {{c.src.meta}}</span>
+                  <sc-if value="{{c.isTodo}}" hint-placeholder-val="{{true}}"><span class="tag"><span class="avatar avatar-xs" style="margin-left: -6px">{{c.initials}}</span>{{c.owner}}</span><span class="tag">{{c.due}}</span></sc-if>
+                  <sc-if value="{{c.isStep}}" hint-placeholder-val="{{false}}"><span class="tag">{{c.actLabel}}</span></sc-if>
+                </div>
+                <sc-if value="{{c.isTop}}" hint-placeholder-val="{{true}}">
+                  <div class="fact">
+                    <button class="btn btn-primary" onClick="{{c.approve}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{{c.approveLabel}}<span class="kbd">A</span></button>
+                    <button class="btn" onClick="{{c.edit}}">Bekijken &amp; bewerken<span class="kbd">E</span></button>
+                    <span class="grow"></span>
+                    <button class="btn btn-ghost" onClick="{{c.later}}">Later<span class="kbd">S</span></button>
+                    <button class="btn btn-ghost btn-dng" onClick="{{c.reject}}">{{c.rejectLabel}}<span class="kbd">R</span></button>
+                  </div>
+                </sc-if>
+              </article>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{noQueue}}" hint-placeholder-val="{{false}}">
+          <div class="celebrate">
+            <div class="cele-ic" style="width: 64px; height: 64px; border-radius: 22px"><svg class="ic" style="width: 28px; height: 28px; stroke-width: 2.4" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+            <div class="disp" style="font-size: 24px; font-weight: 600">Alles beslist</div>
+            <div class="muted">Mooi. Er wacht niets meer op jouw beslissing.</div>
+          </div>
+        </sc-if>
+        <div class="fnav">
+          <button class="btn btn-ghost" onClick="{{fPrev}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Terug</button>
+          <button class="btn {{nextBtnCls}} magnet" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{fNext}}">{{skipLabel}}<svg class="ic arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- stap 3 -->
+    <sc-if value="{{fs2}}" hint-placeholder-val="{{false}}">
+      <div class="focus-stage">
+        <div class="focus-head rv {{stepFlip}}">
+          <span class="tag warn">Stap 3 van 4</span>
+          <h1><span class="line"><span>Even polsen bij je team.</span></span></h1>
+          <p>Van deze mensen kwam er een tijdje niets. Eén kort bericht is vaak genoeg.</p>
+        </div>
+        <div class="flist">
+          <sc-for list="{{follows}}" as="f" hint-placeholder-count="3">
+            <div class="panel fireitem tilt rv {{f.cls}}" style="animation-delay: {{f.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+              <span class="avatar avatar-lg presence {{f.fresh}} z1">{{f.initials}}</span>
+              <div class="grow z1" style="display: flex; flex-direction: column; gap: 6px">
+                <div class="row g8 wrap"><b style="font-weight: 600; font-size: 15px">{{f.name}}</b><span class="tag {{f.tagCls}}">{{f.last}}</span><span class="small muted">· {{f.project}}</span></div>
+                <div class="item-d">Werkt aan <b style="color: var(--text); font-weight: 500">{{f.working}}</b></div>
+                <sc-if value="{{f.open}}" hint-placeholder-val="{{true}}">
+                  <div class="acts" style="margin-top: 4px">
+                    <button class="btn btn-primary btn-sm" onClick="{{f.ask}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17"></path></svg>Vraag status</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{f.fine}}">Alles ok, overslaan</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{f.handled}}" hint-placeholder-val="{{false}}"><div class="row g8 small" style="color: var(--ok)"><span class="okc" style="width: 20px; height: 20px"><svg class="ic" style="width: 11px; height: 11px; stroke-width: 3" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>{{f.doneLabel}}</div></sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="fnav">
+          <button class="btn btn-ghost" onClick="{{fPrev}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Terug</button>
+          <button class="btn btn-primary btn-lg magnet" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{fNext}}">Verder naar je dag<svg class="ic arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- stap 4 -->
+    <sc-if value="{{fs3}}" hint-placeholder-val="{{false}}">
+      <div class="focus-stage">
+        <div class="focus-head rv {{stepFlip}}">
+          <span class="tag ok">Stap 4 van 4</span>
+          <h1><span class="line"><span>Zo ziet je dag eruit.</span></span></h1>
+          <p>Vier meetings en vijf deadlines deze week. Meer hoef je nu niet te weten.</p>
+        </div>
+        <div class="panel" style="width: 100%; max-width: 720px">
+          <div class="tlv" style="padding-top: 20px">
+            <sc-for list="{{meetingsToday}}" as="m" hint-placeholder-count="4">
+              <div class="tlv-i rv" style="animation-delay: {{m.delay}}ms">
+                <span class="srcic mono" style="font-size: 10.5px; width: 32px">{{m.short}}</span>
+                <div class="grow"><div style="font-weight: 600">{{m.title}}</div><div class="small muted"><span class="mono">{{m.time}}</span> · {{m.sub}}</div></div>
+                <button class="btn btn-ghost btn-sm" onClick="{{m.go}}">Openen</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="fnav">
+          <button class="btn btn-ghost" onClick="{{fPrev}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Terug</button>
+          <button class="btn btn-primary btn-lg magnet" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{fNext}}">Ronde afronden<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- klaar -->
+    <sc-if value="{{fs4}}" hint-placeholder-val="{{false}}">
+      <div class="celebrate">
+        <sc-for list="{{confetti}}" as="p" hint-placeholder-count="0"><span class="conf-p" style="background: {{p.c}}; --bx: {{p.x}}px; --by: {{p.y}}px; animation-delay: {{p.d}}ms" aria-hidden="true"></span></sc-for>
+        <div class="cele-ic"><svg class="ic" style="width: 38px; height: 38px; stroke-width: 2.4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+        <h1 class="disp" style="font-size: 44px; font-weight: 600; letter-spacing: -.04em"><span class="line"><span style="animation-delay: 200ms">Je bent bij.</span></span></h1>
+        <p class="muted" style="font-size: 15px; max-width: 460px">Alles wat aandacht vroeg, heeft een plek gekregen. De agent laat je weten als er iets nieuws binnenkomt.</p>
+        <div class="sumrow">
+          <sc-for list="{{summary}}" as="s" hint-placeholder-count="3"><div class="panel sumbox rv" style="animation-delay: {{s.d}}ms"><b>{{s.n}}</b><span class="small muted">{{s.l}}</span></div></sc-for>
+        </div>
+        <div class="row g8 wrap" style="justify-content: center; margin-top: 8px">
+          <button class="btn btn-primary btn-lg" onClick="{{goVandaag}}">Terug naar Vandaag</button>
+          <button class="btn btn-lg" onClick="{{goProjecten}}">Bekijk projecten</button>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+  </sc-if>
+  <!-- ===================== PROJECTEN ===================== -->
+  <sc-if value="{{isProjecten}}" hint-placeholder-val="{{false}}">
+  <main class="content">
+    <div class="page-h">
+      <div>
+        <div class="eyebrow rv">Portfolio</div>
+        <h1><span class="line"><span>Je projecten</span></span></h1>
+        <p class="lede rv" style="animation-delay: 150ms">Vier lopende projecten. Het project dat het meest aandacht vraagt, staat vooraan.</p>
+      </div>
+      <div class="row g8 rv" style="animation-delay: 200ms">
+        <button class="btn {{filterBtnCls}}" onClick="{{toggleFilters}}" aria-expanded="{{filtersAria}}">
+          <svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Filter
+          <sc-if value="{{filtersActive}}" hint-placeholder-val="{{false}}"><span class="badge">{{filterCount}}</span></sc-if>
+        </button>
+      </div>
+    </div>
+
+    <div class="fpanel {{fpanelCls}}">
+      <div>
+        <div class="panel fpanel-in">
+          <div class="fgroup"><span class="lbl">Gezondheid</span>
+            <sc-for list="{{healthChips}}" as="c" hint-placeholder-count="4"><button class="chip {{c.on}}" style="animation-delay: {{c.delay}}ms" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"><sc-if value="{{c.hasDot}}" hint-placeholder-val="{{false}}"><span class="dot {{c.dot}}" aria-hidden="true"></span></sc-if>{{c.label}}</button></sc-for>
+          </div>
+          <div class="fgroup"><span class="lbl">Fase</span>
+            <sc-for list="{{phaseChips}}" as="c" hint-placeholder-count="8"><button class="chip {{c.on}}" style="animation-delay: {{c.delay}}ms" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}</button></sc-for>
+          </div>
+          <div class="fgroup"><span class="lbl">Klant</span>
+            <sc-for list="{{clientChips}}" as="c" hint-placeholder-count="5"><button class="chip {{c.on}}" style="animation-delay: {{c.delay}}ms" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}</button></sc-for>
+          </div>
+          <div class="row g8"><span class="small muted grow">{{cardCount}}</span><sc-if value="{{filtersActive}}" hint-placeholder-val="{{false}}"><button class="btn btn-ghost btn-sm" onClick="{{clearFilters}}">Alles wissen</button></sc-if></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <sc-for list="{{cards}}" as="c" hint-placeholder-count="4">
+        <article class="panel card tilt rv {{listFlip}}" style="animation-delay: {{c.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}" onClick="{{c.go}}">
+          <div class="row g16 z1" style="align-items: flex-start">
+            <div class="grow" style="display: flex; flex-direction: column; gap: 8px">
+              <span class="small muted">{{c.client}}</span>
+              <h3><button class="card-link" onClick="{{c.go}}">{{c.name}}</button></h3>
+              <div><span class="hp {{c.health}}"><span class="dot {{c.health}}" aria-hidden="true"></span>{{c.healthLabel}}</span></div>
+            </div>
+            <div class="ringbox z2" style="width: 68px; height: 68px">
+              <svg class="ring {{c.health}}" width="68" height="68" viewBox="0 0 68 68" aria-hidden="true"><circle class="trk" cx="34" cy="34" r="28" stroke-width="6"></circle><circle class="val" cx="34" cy="34" r="28" stroke-width="6" stroke-dasharray="175.93" style="--c: 175.93; stroke-dashoffset: {{c.ringOff}}"></circle></svg>
+              <span class="lbl" style="font-size: 15px">{{c.progress}}%</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div class="row g8 small"><span class="muted grow">Fase {{c.phaseNum}} van 7</span><b style="font-weight: 600">{{c.phaseName}}</b></div>
+            <div class="mini" aria-hidden="true"><sc-for list="{{c.mini}}" as="s"><span class="{{s.cls}}"></span></sc-for></div>
+          </div>
+          <div class="kv"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2"></path></svg><span class="grow">{{c.deadline}}</span><span class="due">{{c.deadlineDate}}</span></div>
+          <div class="card-foot">
+            <sc-if value="{{c.hasOpen}}" hint-placeholder-val="{{true}}"><button class="prop-btn" onClick="{{c.goInbox}}"><i aria-hidden="true"></i>{{c.open}} voorstellen<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></sc-if>
+            <sc-if value="{{c.noOpen}}" hint-placeholder-val="{{false}}"><span class="muted">Niets te beslissen</span></sc-if>
+            <div class="stack"><sc-for list="{{c.team}}" as="t"><span class="avatar avatar-xs" title="{{t.name}}">{{t.ini}}</span></sc-for></div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <sc-if value="{{noCards}}" hint-placeholder-val="{{false}}">
+      <div class="panel empty"><b style="color: var(--text)">Geen projecten voor deze filters</b><button class="btn btn-sm" onClick="{{clearFilters}}">Filters wissen</button></div>
+    </sc-if>
+  </main>
+  </sc-if>
+  <!-- ===================== PROJECT HUB ===================== -->
+  <sc-if value="{{isHub}}" hint-placeholder-val="{{false}}">
+  <main class="content">
+    <section class="panel hubhero rv" aria-label="Project">
+      <div class="grow" style="min-width: 280px; display: flex; flex-direction: column; gap: 10px">
+        <div class="crumbs"><button class="link" onClick="{{goProjecten}}">Projecten</button><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg><span>{{p.client}}</span></div>
+        <h1><span class="line"><span style="animation-delay: 150ms">{{p.name}}</span></span></h1>
+        <div class="row g8 wrap rv" style="animation-delay: 300ms">
+          <span class="hp {{p.health}}"><span class="dot {{p.health}}" aria-hidden="true"></span>{{p.healthLabel}}</span>
+          <span class="tag">Fase {{p.phaseNum}}/7 · {{p.phaseName}}</span>
+          <span class="tag"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17"></path></svg>{{p.channel}}</span>
+          <div class="stack" style="margin-left: 4px"><sc-for list="{{p.team}}" as="t"><span class="avatar" title="{{t.name}}">{{t.ini}}</span></sc-for></div>
+        </div>
+      </div>
+      <div class="row g16 rv" style="animation-delay: 250ms; transform: translate3d(calc(var(--px,0) * -14px), calc(var(--py,0) * -10px), 0); transition: transform .9s cubic-bezier(.2,.8,.2,1)">
+        <div class="ringbox" style="width: 120px; height: 120px">
+          <svg class="ring" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="51" stroke-width="10"></circle><circle class="val" cx="60" cy="60" r="51" stroke-width="10" stroke-dasharray="320.44" style="--c: 320.44; stroke-dashoffset: {{p.ringOff}}"></circle></svg>
+          <span class="lbl"><span class="disp" style="font-size: 28px">{{p.progress}}%</span><span class="small muted" style="font-weight: 500">afgerond</span></span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div><div class="small muted">Verwachte livegang</div><b class="disp" style="font-size: 19px">{{p.golive}}</b></div>
+          <button class="btn btn-ink btn-sm" onClick="{{p.openAsana}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l2.8 2.8L16 9.8"></path></svg>Open in Asana</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="row wrap g12 rv" style="animation-delay: 200ms; justify-content: space-between">
+      <div class="tabs" role="tablist" aria-label="Projectonderdelen">
+        <span class="tabs-pill" style="transform: translateX({{tabX}}px)" aria-hidden="true"></span>
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+          <button class="{{t.on}}" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}">{{t.label}}<sc-if value="{{t.hasN}}" hint-placeholder-val="{{false}}"><span class="badge">{{t.n}}</span></sc-if></button>
+        </sc-for>
+      </div>
+      <button class="btn btn-sm" onClick="{{p.goInbox}}">Project-inbox<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+    </div>
+
+    <!-- tab: overzicht -->
+    <sc-if value="{{tab0}}" hint-placeholder-val="{{true}}">
+      <sc-if value="{{p.hasOpenAll}}" hint-placeholder-val="{{true}}">
+        <div class="nudge rv {{tabFlip}}">
+          <span class="waiting" style="background: rgba(255,255,255,.2); color: var(--on-accent)"><i style="background: var(--on-accent)"></i>Wacht op jou</span>
+          <span class="grow" style="font-weight: 500">{{p.openAllText}}</span>
+          <button class="btn btn-sm" onClick="{{p.goDecide}}">Bekijk één voor één<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </sc-if>
+      <section class="panel rv {{tabFlip}}" style="animation-delay: 60ms" aria-label="Fasetijdlijn">
+        <div class="panel-h" style="padding-bottom: 0">
+          <span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg></span>
+          <h2 class="grow">Projectreis</h2>
+          <span class="small muted">% afgerond en verwachte einddatum per fase</span>
+        </div>
+        <div class="tl-scroll"><div class="tl">
+          <div class="tl-track"><div class="tl-fill" style="width: {{p.trackPct}}%"></div></div>
+          <div class="tl-grid">
+            <sc-for list="{{p.phases}}" as="ph" hint-placeholder-count="7">
+              <div class="tl-step {{ph.cls}}">
+                <span class="tl-node" style="animation-delay: {{ph.delay}}ms"><span>
+                  <sc-if value="{{ph.isDone}}" hint-placeholder-val="{{false}}"><svg class="ic ic-s" style="stroke-width: 2.4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+                  <sc-if value="{{ph.notDone}}" hint-placeholder-val="{{true}}">{{ph.num}}</sc-if>
+                </span></span>
+                <div class="tl-name">{{ph.name}}</div>
+                <div class="tl-card">
+                  <sc-if value="{{ph.isCurrent}}" hint-placeholder-val="{{false}}"><span style="font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text)">Nu</span></sc-if>
+                  <div class="bar"><span style="width: {{ph.pct}}%"></span></div>
+                  <div class="tl-meta"><span class="mono">{{ph.pct}}%</span><span>{{ph.endLabel}}</span></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div></div>
+      </section>
+      <div class="tiles">
+        <div class="panel tile tilt rv {{tabFlip}}" style="animation-delay: 120ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+          <div class="tile-l z1">Gezondheid</div>
+          <div class="z1"><span class="hp {{p.health}}" style="font-size: 14px; padding: 5px 12px 5px 10px"><span class="dot {{p.health}}" aria-hidden="true"></span>{{p.healthLabel}}</span></div>
+          <div class="tile-s z1">{{p.healthWhy}}</div>
+        </div>
+        <div class="panel tile tilt rv {{tabFlip}}" style="animation-delay: 170ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+          <div class="tile-l z1">{{p.hoursLabel}}</div>
+          <div class="row g12 z1">
+            <div class="ringbox" style="width: 48px; height: 48px">
+              <svg class="ring {{p.hoursRing}}" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle class="trk" cx="24" cy="24" r="19" stroke-width="5"></circle><circle class="val" cx="24" cy="24" r="19" stroke-width="5" stroke-dasharray="119.38" style="--c: 119.38; stroke-dashoffset: {{p.hoursOff}}"></circle></svg>
+              <span class="lbl" style="font-size: 11px">{{p.hoursPct}}%</span>
+            </div>
+            <div class="tile-v">{{p.hoursUsed}}<span class="muted" style="font-size: 14px; font-family: 'Geist', sans-serif"> / {{p.hoursBudget}} u</span></div>
+          </div>
+          <div class="tile-s z1">{{p.hoursNote}}</div>
+        </div>
+        <div class="panel tile tilt rv {{tabFlip}}" style="animation-delay: 220ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+          <div class="tile-l z1">Volgende milestone</div>
+          <div class="tile-v z1" style="font-size: 20px">{{p.milestone}}</div>
+          <div class="row g8 z1"><span class="tag acc">{{p.milestoneIn}}</span><span class="tile-s">{{p.milestoneDate}}</span></div>
+        </div>
+        <div class="panel tile tilt rv {{tabFlip}} {{p.blockTile}}" style="animation-delay: 270ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+          <div class="tile-l z1">Blokkades</div>
+          <div class="tile-v z1">{{p.blockerCount}}</div>
+          <div class="tile-s z1">{{p.blockerText}}</div>
+        </div>
+      </div>
+      <section class="panel rv {{tabFlip}}" style="animation-delay: 320ms" aria-label="Bevindingen van de agent">
+        <div class="panel-h">
+          <span class="hdr-ic acc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"></path></svg></span>
+          <h2 class="grow">Wat de agent ziet</h2>
+          <span class="small muted">Afgelopen 7 dagen · {{p.itemsRead}} items</span>
+        </div>
+        <div class="panel-b">
+          <p class="summary">{{p.summary}}</p>
+          <button class="disclose {{moreCls}}" style="margin-top: 14px" onClick="{{toggleMore}}" aria-expanded="{{moreAria}}">{{moreLabel}}<svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <sc-if value="{{moreOpen}}" hint-placeholder-val="{{false}}">
+            <div class="daylist">
+              <div class="sub-h">Wat opvalt</div>
+              <ul class="notes">
+                <sc-for list="{{p.notes}}" as="n" hint-placeholder-count="2">
+                  <li><span>{{n.text}}</span><span class="src"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.src.icon}}"></path></svg><b>{{n.src.type}}</b>{{n.src.label}}<button class="srclink" onClick="{{n.src.open}}">Origineel</button></span></li>
+                </sc-for>
+              </ul>
+              <div class="sub-h">Risico's</div>
+              <div style="display: flex; flex-direction: column; margin: 0 -12px">
+                <sc-for list="{{p.risks}}" as="r" hint-placeholder-count="3">
+                  <div class="risk"><span class="risk-m {{r.cls}}" aria-hidden="true"><span></span><span></span><span></span></span><span class="tag {{r.cls}}" style="min-width: 56px; justify-content: center">{{r.level}}</span><span>{{r.text}}</span></div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- tab: beslissen -->
+    <sc-if value="{{tab1}}" hint-placeholder-val="{{false}}">
+      <section class="panel panel-act rv {{tabFlip}}" aria-label="Voorgestelde volgende stappen">
+        <div class="panel-h">
+          <span class="hdr-ic acc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+          <h2 class="grow">Voorgestelde volgende stappen</h2>
+          <sc-if value="{{p.hasStepsOpen}}" hint-placeholder-val="{{true}}"><span class="waiting"><i aria-hidden="true"></i>{{p.stepsOpen}} wachten op jou</span></sc-if>
+        </div>
+        <div class="items">
+          <sc-for list="{{p.steps}}" as="s" hint-placeholder-count="3">
+            <sc-if value="{{s.pending}}" hint-placeholder-val="{{true}}">
+              <div class="item">
+                <span class="numc">{{s.num}}</span>
+                <div class="item-body">
+                  <button class="tlink" onClick="{{s.open}}">{{s.title}}</button>
+                  <div class="item-d">{{s.detail}}</div>
+                  <div><span class="src"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{s.src.icon}}"></path></svg><b>{{s.src.type}}</b>{{s.src.label}} · {{s.src.meta}}<button class="srclink" onClick="{{s.src.open}}">Origineel</button></span></div>
+                  <div class="acts">
+                    <button class="btn btn-primary btn-sm" onClick="{{s.exec}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l12 8-12 8z"></path></svg>Uitvoeren</button>
+                    <button class="btn btn-sm" onClick="{{s.open}}">Details &amp; bewerken</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{s.asana}}">Naar Asana</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{s.ignore}}">Negeren</button>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{s.done}}" hint-placeholder-val="{{false}}">
+              <div class="resolved"><span class="okc {{s.okCls}}"><svg class="ic" style="width: 12px; height: 12px; stroke-width: 2.6" viewBox="0 0 24 24" aria-hidden="true"><path d="{{s.okIcon}}"></path></svg></span><span class="tag">{{s.doneLabel}}</span><span class="grow">{{s.title}}</span><button class="link small" onClick="{{s.undo}}">Ongedaan maken</button></div>
+            </sc-if>
+          </sc-for>
+        </div>
+      </section>
+      <section class="panel panel-act rv {{tabFlip}}" style="animation-delay: 100ms" aria-label="Nieuw gespotte to-do's">
+        <div class="panel-h">
+          <span class="hdr-ic acc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+          <h2 class="grow">Nieuw gespotte to-do's</h2>
+          <sc-if value="{{p.hasTodosOpen}}" hint-placeholder-val="{{true}}"><span class="waiting"><i aria-hidden="true"></i>{{p.todosOpen}} te beoordelen</span></sc-if>
+        </div>
+        <div class="items">
+          <sc-for list="{{p.todos}}" as="t" hint-placeholder-count="3">
+            <sc-if value="{{t.pending}}" hint-placeholder-val="{{true}}">
+              <div class="item">
+                <span class="avatar avatar-lg" title="Voorgestelde eigenaar">{{t.initials}}</span>
+                <div class="item-body">
+                  <button class="tlink" onClick="{{t.edit}}">{{t.title}}</button>
+                  <div class="quote">{{t.quote}}</div>
+                  <div class="row g8 wrap">
+                    <span class="src"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.src.icon}}"></path></svg><b>{{t.src.type}}</b>{{t.src.label}} · {{t.src.meta}}<button class="srclink" onClick="{{t.src.open}}">Origineel</button></span>
+                    <span class="tag">{{t.owner}}</span><span class="tag">{{t.due}}</span>
+                  </div>
+                  <div class="acts">
+                    <button class="btn btn-primary btn-sm" onClick="{{t.approve}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Goedkeuren → Asana</button>
+                    <button class="btn btn-sm" onClick="{{t.edit}}">Bewerken</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{t.reject}}">Afwijzen</button>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{t.done}}" hint-placeholder-val="{{false}}">
+              <div class="resolved"><span class="okc {{t.okCls}}"><svg class="ic" style="width: 12px; height: 12px; stroke-width: 2.6" viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.okIcon}}"></path></svg></span><span class="tag">{{t.doneLabel}}</span><span class="grow">{{t.title}}</span><button class="link small" onClick="{{t.undo}}">Ongedaan maken</button></div>
+            </sc-if>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- tab: taken -->
+    <sc-if value="{{tab2}}" hint-placeholder-val="{{false}}">
+      <section class="panel rv {{tabFlip}}" aria-label="Openstaande to-do's in Asana">
+        <div class="panel-h">
+          <span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l2.8 2.8L16 9.8"></path></svg></span>
+          <h2 class="grow">Openstaande taken <span class="muted" style="font-weight: 400; font-family: 'Geist', sans-serif; font-size: 14px">· Asana</span></h2>
+          <div class="seg" role="group" aria-label="Groeperen"><button class="{{groupPersoon}}" onClick="{{byPersoon}}">Per persoon</button><button class="{{groupStatus}}" onClick="{{byStatus}}">Per status</button></div>
+        </div>
+        <div style="padding: 0 22px 8px"><div class="stackbar"><sc-for list="{{p.statusStack}}" as="s"><span class="{{s.cls}}" style="flex: {{s.n}}"></span></sc-for></div><div class="legend" style="margin-top: 8px"><sc-for list="{{p.statusStack}}" as="s"><span><i class="{{s.cls}}"></i>{{s.label}} {{s.n}}</span></sc-for></div></div>
+        <sc-for list="{{p.groups}}" as="g" hint-placeholder-count="3">
+          <div class="grp">
+            <div class="grp-h"><sc-if value="{{g.isPerson}}" hint-placeholder-val="{{true}}"><span class="avatar avatar-xs">{{g.ini}}</span></sc-if><span class="grow">{{g.name}}</span><span class="badge badge-soft">{{g.count}}</span></div>
+            <sc-for list="{{g.items}}" as="k" hint-placeholder-count="2">
+              <div class="task {{k.newCls}}">
+                <span class="circ" aria-hidden="true"><svg class="ic" style="width: 10px; height: 10px; stroke-width: 3" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                <span class="grow">{{k.title}}</span>
+                <sc-if value="{{k.isNew}}" hint-placeholder-val="{{false}}"><span class="tag acc">Nieuw via agent</span></sc-if>
+                <span class="tag {{k.statusCls}}">{{k.status}}</span>
+                <span class="avatar avatar-xs" title="{{k.owner}}">{{k.initials}}</span>
+                <span class="due {{k.dueCls}}" style="min-width: 110px; text-align: right">{{k.dueLabel}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <!-- tab: team -->
+    <sc-if value="{{tab3}}" hint-placeholder-val="{{false}}">
+      <section class="panel rv {{tabFlip}}" aria-label="Developer-checks">
+        <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"></path></svg></span><h2 class="grow">Team</h2><span class="small muted">Laatste teken van leven per teamlid</span></div>
+        <div class="devs">
+          <sc-for list="{{p.devs}}" as="d" hint-placeholder-count="3">
+            <div class="dev tilt rv {{d.cls}}" style="animation-delay: {{d.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+              <div class="row g12 z1">
+                <span class="avatar avatar-lg presence {{d.freshCls}}">{{d.initials}}</span>
+                <div class="grow"><div style="font-weight: 600">{{d.name}}</div><div class="small muted">{{d.role}}</div></div>
+                <span class="tag {{d.freshCls}}">{{d.last}}</span>
+              </div>
+              <div class="z1"><div class="dev-k">Werkt aan</div><div class="dev-v">{{d.working}}</div></div>
+              <div class="z1"><div class="dev-k">Laatste update · {{d.via}}</div><div class="dev-v">{{d.update}}</div></div>
+              <sc-if value="{{d.hasBlocker}}" hint-placeholder-val="{{false}}"><div class="blk z1"><svg class="ic ic-s" style="margin-top: 2px" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 2.5 20h19zM12 10v4M12 17h.01"></path></svg><span>{{d.blocker}}</span></div></sc-if>
+              <sc-if value="{{d.notSent}}" hint-placeholder-val="{{true}}"><button class="btn btn-sm z1 {{d.askCls}}" style="align-self: flex-start" onClick="{{d.ask}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17"></path></svg>Vraag status</button></sc-if>
+              <sc-if value="{{d.isSent}}" hint-placeholder-val="{{false}}"><div class="row g8 small z1" style="color: var(--ok)"><span class="okc" style="width: 18px; height: 18px"><svg class="ic" style="width: 10px; height: 10px; stroke-width: 3" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Verstuurd om <span class="mono">{{d.sentAt}}</span></div></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- tab: context -->
+    <sc-if value="{{tab4}}" hint-placeholder-val="{{false}}">
+      <div class="cols">
+        <div class="col-main">
+          <section class="panel rv {{tabFlip}}" aria-label="Activiteitenfeed">
+            <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span><h2 class="grow">Activiteit</h2></div>
+            <div class="feed-f" role="group" aria-label="Filter op bron"><sc-for list="{{feedChips}}" as="f" hint-placeholder-count="8"><button class="chip {{f.on}}" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}">{{f.label}}</button></sc-for></div>
+            <div class="tlv">
+              <sc-for list="{{p.feed}}" as="e" hint-placeholder-count="5">
+                <div class="tlv-i rv {{listFlip}}" style="animation-delay: {{e.delay}}ms">
+                  <span class="srcic" title="{{e.type}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{e.icon}}"></path></svg></span>
+                  <div class="grow" style="padding-top: 2px"><div class="small muted"><b style="color: var(--text); font-weight: 600">{{e.who}}</b> · {{e.type}} · {{e.when}}</div><div style="margin-top: 2px">{{e.text}}</div></div>
+                  <button class="btn btn-ghost btn-sm btn-icon" onClick="{{e.open}}" aria-label="Open origineel"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></button>
+                </div>
+              </sc-for>
+              <sc-if value="{{p.feedEmpty}}" hint-placeholder-val="{{false}}"><div class="empty small">Geen activiteit uit deze bron.</div></sc-if>
+            </div>
+          </section>
+        </div>
+        <div class="col-side">
+          <section class="panel rv {{tabFlip}}" style="animation-delay: 80ms" aria-label="Agenda">
+            <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v15H4zM4 10h16M8 3v4M16 3v4"></path></svg></span><h2 class="grow">Agenda</h2></div>
+            <div class="list"><sc-for list="{{p.meetings}}" as="m" hint-placeholder-count="3"><div class="lrow"><div class="date {{m.todayCls}}"><small>{{m.dow}}</small><b>{{m.dnum}}</b></div><div class="grow"><div style="font-weight: 500">{{m.title}}</div><div class="small muted"><span class="mono">{{m.time}}</span> · {{m.who}}</div></div></div></sc-for></div>
+          </section>
+          <section class="panel rv {{tabFlip}}" style="animation-delay: 140ms" aria-label="Documenten">
+            <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v4h4"></path></svg></span><h2 class="grow">Documenten</h2></div>
+            <div class="docs"><sc-for list="{{p.docs}}" as="d" hint-placeholder-count="4"><button class="doc" onClick="{{d.open}}"><span class="srcic" style="background: var(--surface)"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{d.icon}}"></path></svg></span><span><span style="display: block; font-weight: 500; font-size: 13px; line-height: 1.35">{{d.title}}</span><span class="small muted" style="font-size: 11.5px">{{d.meta}}</span></span></button></sc-for></div>
+          </section>
+          <section class="panel rv {{tabFlip}}" style="animation-delay: 200ms" aria-label="Beslissingenlog">
+            <div class="panel-h"><span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><h2 class="grow">Beslissingen</h2><span class="badge badge-soft">{{p.decCount}}</span></div>
+            <div class="tlv"><sc-for list="{{p.decisions}}" as="d" hint-placeholder-count="3"><div class="tlv-i"><span class="srcic mono" style="font-size: 10px; width: 32px">{{d.short}}</span><div class="grow" style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start"><span class="small muted mono">{{d.date}}</span><span style="font-size: 13.5px">{{d.text}}</span><span class="src"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{d.src.icon}}"></path></svg><b>{{d.src.type}}</b>{{d.src.label}}<button class="srclink" onClick="{{d.src.open}}">Origineel</button></span></div></div></sc-for></div>
+          </section>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+  </sc-if>
+  <!-- ===================== INBOX ===================== -->
+  <sc-if value="{{isInbox}}" hint-placeholder-val="{{false}}">
+  <main class="content">
+    <div class="page-h">
+      <div>
+        <div class="eyebrow rv">Over alle projecten heen</div>
+        <h1><span class="line"><span>Inbox</span></span></h1>
+        <p class="lede rv" style="animation-delay: 150ms">{{inboxSummary}}</p>
+      </div>
+      <sc-if value="{{hasOpen}}" hint-placeholder-val="{{true}}">
+        <button class="btn btn-primary magnet rv" style="animation-delay: 200ms" onMouseMove="{{magnet}}" onMouseLeave="{{magnetOut}}" onClick="{{startDecide}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l12 8-12 8z"></path></svg>Eén voor één afhandelen</button>
+      </sc-if>
+    </div>
+
+    <div class="ptiles" role="group" aria-label="Kies een project">
+      <sc-for list="{{inboxProjChips}}" as="c" hint-placeholder-count="5">
+        <button class="ptile tilt rv {{c.on}}" style="animation-delay: {{c.delay}}ms" onClick="{{c.pick}}" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}" aria-pressed="{{c.pressed}}">
+          <span class="ptile-check" aria-hidden="true"><svg class="ic" style="width: 12px; height: 12px; stroke-width: 2.8" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+          <span class="ptile-top"><span class="dot {{c.health}}" aria-hidden="true"></span>{{c.client}}</span>
+          <span class="ptile-name z1">{{c.label}}</span>
+          <span class="ptile-foot z1"><span class="ptile-n">{{c.n}}</span><span class="ptile-sub">{{c.sub}}</span></span>
+          <span class="ptile-bar" aria-hidden="true"><span style="width: {{c.share}}%"></span></span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div class="row wrap g12" style="justify-content: space-between">
+      <div class="kindseg" role="group" aria-label="Soort voorstel">
+        <span class="kindseg-pill" style="transform: translateX({{kindX}}%)" aria-hidden="true"></span>
+        <sc-for list="{{inboxKindChips}}" as="c" hint-placeholder-count="3"><button class="{{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}<span class="mono">{{c.n}}</span></button></sc-for>
+      </div>
+      <sc-if value="{{hasInboxProj}}" hint-placeholder-val="{{false}}">
+        <div class="projbar">
+          <span class="dot {{ip.health}}" aria-hidden="true"></span>
+          <span><b style="font-weight: 600">{{ip.name}}</b> <span class="muted">· {{ip.phase}} · {{ip.healthLabel}}</span></span>
+          <button class="btn btn-sm" onClick="{{ip.goHub}}">Project<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          <button class="btn btn-ghost btn-sm btn-icon" onClick="{{ip.clear}}" aria-label="Toon alle projecten"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{anySel}}" hint-placeholder-val="{{false}}">
+      <div class="bulk">
+        <b class="grow">{{selCount}} geselecteerd</b>
+        <button class="btn btn-sm" onClick="{{bulkApprove}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Goedkeuren</button>
+        <select class="sel" value="" onChange="{{bulkOwner}}" aria-label="Eigenaar toewijzen">
+          <option value="">Eigenaar toewijzen…</option>
+          <option>Lucas Galle</option><option>Nina Verbeke</option><option>Jens Peeters</option><option>Amira El Idrissi</option><option>Thomas Wouters</option><option>Lotte Claes</option><option>Bram De Smet</option>
+        </select>
+        <button class="btn btn-sm" onClick="{{bulkSnooze}}">Later</button>
+        <button class="btn btn-sm" onClick="{{bulkReject}}">Afwijzen</button>
+        <button class="btn btn-sm" onClick="{{clearSel}}">Wissen</button>
+      </div>
+    </sc-if>
+
+    <section class="panel ibx rv" style="animation-delay: 250ms" tabIndex="0" onKeyDown="{{onInboxKey}}" aria-label="Voorstellen. Sneltoetsen: J en K navigeren, X selecteren, A goedkeuren, Enter openen, S later, R afwijzen">
+      <div class="keys" style="padding: 8px 12px 10px" aria-hidden="true">
+        <span><span class="kbd">J</span><span class="kbd">K</span> navigeren</span><span><span class="kbd">X</span> selecteren</span><span><span class="kbd">A</span> goedkeuren</span><span><span class="kbd">↵</span> openen</span><span><span class="kbd">S</span> later</span><span><span class="kbd">R</span> afwijzen</span>
+      </div>
+      <sc-for list="{{inboxGroups}}" as="g" hint-placeholder-count="3">
+        <div class="igrp-h rv {{listFlip}}"><span class="dot {{g.health}}" aria-hidden="true"></span><b style="font-weight: 600">{{g.name}}</b><span class="small muted">{{g.client}}</span><span class="grow"></span><span class="badge badge-soft">{{g.count}}</span></div>
+        <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+          <div class="irow rv {{listFlip}} {{it.rowCls}}" style="animation-delay: {{it.delay}}ms" onClick="{{it.open}}">
+            <input type="checkbox" checked="{{it.selected}}" onChange="{{it.toggle}}" onClick="{{stop}}" aria-label="Selecteer voorstel">
+            <span class="kind {{it.kindCls}}" title="{{it.kindLabel}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{it.kindIcon}}"></path></svg></span>
+            <div class="grow">
+              <div class="row g8" style="min-width: 0"><span class="t">{{it.title}}</span><sc-if value="{{it.edited}}" hint-placeholder-val="{{false}}"><span class="tag acc">Bewerkt</span></sc-if></div>
+              <div class="m"><svg class="ic" style="width: 12px; height: 12px" viewBox="0 0 24 24" aria-hidden="true"><path d="{{it.src.icon}}"></path></svg>{{it.src.label}}<span>·</span><span class="ex">{{it.detail}}</span></div>
+            </div>
+            <sc-if value="{{it.isTodo}}" hint-placeholder-val="{{true}}"><span class="avatar avatar-xs" title="{{it.owner}}">{{it.initials}}</span><span class="due" style="min-width: 44px">{{it.due}}</span></sc-if>
+            <sc-if value="{{it.isStep}}" hint-placeholder-val="{{false}}"><span class="tag">{{it.actLabel}}</span></sc-if>
+            <div class="qa">
+              <button class="btn btn-ghost btn-sm btn-icon ok" onClick="{{it.approve}}" aria-label="Goedkeuren" title="Goedkeuren (A)"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
+              <button class="btn btn-ghost btn-sm btn-icon no" onClick="{{it.reject}}" aria-label="Afwijzen" title="Afwijzen (R)"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+            </div>
+          </div>
+        </sc-for>
+      </sc-for>
+      <sc-if value="{{inboxEmpty}}" hint-placeholder-val="{{false}}">
+        <div class="empty">
+          <span class="okc"><svg class="ic ic-l" style="stroke-width: 2.4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+          <b class="disp" style="color: var(--text); font-size: 20px">Inbox leeg</b>
+          <span class="small">Alles in deze selectie is afgehandeld.</span>
+        </div>
+      </sc-if>
+    </section>
+  </main>
+  </sc-if>
+  <!-- ===================== BRONNEN ===================== -->
+  <sc-if value="{{isBronnen}}" hint-placeholder-val="{{false}}">
+  <main class="content">
+    <div class="page-h">
+      <div>
+        <div class="eyebrow rv">Wat de agent leest</div>
+        <h1><span class="line"><span>Bronnen</span></span></h1>
+        <p class="lede rv" style="animation-delay: 150ms">De agent leest alles, schrijft enkel taken in Asana na jouw goedkeuring en verstuurt nooit iets zonder jouw klik.</p>
+      </div>
+      <div class="pill rv"><span class="dot ok live" aria-hidden="true"></span>Volgende sync om <span class="mono">{{nextSync}}</span></div>
+    </div>
+    <div class="srcs">
+      <sc-for list="{{sources}}" as="s" hint-placeholder-count="7">
+        <article class="panel srccard tilt rv {{s.cls}}" style="animation-delay: {{s.delay}}ms" onMouseMove="{{tilt}}" onMouseLeave="{{tiltOut}}">
+          <div class="row g12">
+            <span class="bigic"><svg class="ic ic-l {{s.spin}}" viewBox="0 0 24 24" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span>
+            <div class="grow"><div class="disp" style="font-weight: 600; font-size: 17px">{{s.name}}</div><div class="small muted">{{s.role}}</div></div>
+            <span class="hp {{s.statusCls}}"><span class="dot {{s.statusCls}}" aria-hidden="true"></span>{{s.status}}</span>
+          </div>
+          <div class="small" style="color: var(--text-2)">{{s.stat}}</div>
+          <div class="row g8 wrap small muted" style="padding-top: 12px; border-top: 1px dashed var(--border-strong)"><span>Laatste sync <b class="mono" style="color: var(--text)">{{s.last}}</b></span><span class="grow"></span><span>{{s.scope}}</span></div>
+          <div class="row g8">
+            <sc-if value="{{s.ok}}" hint-placeholder-val="{{true}}"><button class="btn btn-sm" onClick="{{s.sync}}">Nu syncen</button><button class="btn btn-ghost btn-sm" onClick="{{s.settings}}">Instellingen</button></sc-if>
+            <sc-if value="{{s.bad}}" hint-placeholder-val="{{false}}"><button class="btn btn-primary btn-sm" onClick="{{s.reconnect}}">Opnieuw verbinden<svg class="ic ic-s arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></sc-if>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <section class="panel rv" style="animation-delay: 300ms" aria-label="Koppelingen per project">
+      <div class="panel-h">
+        <span class="hdr-ic"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg></span>
+        <h2 class="grow">Koppelingen per project</h2>
+        <div class="row g6 wrap" role="group" aria-label="Project"><sc-for list="{{mapChips}}" as="c" hint-placeholder-count="4"><button class="chip {{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"><span class="dot {{c.health}}" aria-hidden="true"></span>{{c.label}}</button></sc-for></div>
+      </div>
+      <div class="list">
+        <sc-for list="{{mapRows}}" as="m" hint-placeholder-count="7">
+          <div class="map-row rv {{listFlip}}" style="animation-delay: {{m.delay}}ms">
+            <div class="row g10"><span class="srcic"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{m.icon}}"></path></svg></span><b style="font-weight: 600">{{m.name}}</b></div>
+            <div class="row g6 wrap"><sc-for list="{{m.items}}" as="v"><span class="tag" style="font-size: 12px; padding: 3px 9px">{{v}}</span></sc-for></div>
+            <button class="btn btn-ghost btn-sm" onClick="{{m.edit}}">Wijzigen</button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+  </sc-if>
+</div>
+</div>
+<sc-if value="{{hasDetail}}" hint-placeholder-val="{{false}}">
+  <div class="overlay" onClick="{{d.close}}">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Voorstel bekijken en bewerken" tabIndex="-1" ref="{{dlgRef}}" onKeyDown="{{d.onKey}}" onClick="{{stop}}">
+      <div class="m-head">
+        <div class="m-prog" aria-hidden="true"><span style="width: {{d.progPct}}%"></span></div>
+        <span class="kind {{d.kindCls}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{d.kindIcon}}"></path></svg></span>
+        <div class="grow" style="min-width: 200px"><div class="row g8 small wrap"><b style="font-weight: 600">{{d.kindLabel}}</b><span class="muted">in</span><span class="dot {{d.health}}" aria-hidden="true"></span><button class="link" onClick="{{d.goProject}}">{{d.projectName}}</button><span class="muted">· {{d.client}}</span></div></div>
+        <sc-if value="{{d.hasNav}}" hint-placeholder-val="{{true}}">
+          <span class="small muted mono">{{d.pos}} / {{d.total}}</span>
+          <button class="btn btn-sm btn-icon" onClick="{{d.prev}}" disabled="{{d.noPrev}}" aria-label="Vorige"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+          <button class="btn btn-sm btn-icon" onClick="{{d.next}}" disabled="{{d.noNext}}" aria-label="Volgende"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </sc-if>
+        <button class="btn btn-ghost btn-sm btn-icon" onClick="{{d.close}}" aria-label="Sluiten"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+      </div>
+      <div class="m-body">
+        <div class="m-main">
+          <div class="m-sec">
+            <input class="m-title" value="{{d.f.title}}" onChange="{{fh.title}}" aria-label="Titel">
+            <div class="row g8 wrap small muted"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"></path></svg>Voorgesteld door de agent · {{d.when}}<sc-if value="{{d.isEdited}}" hint-placeholder-val="{{false}}"><span class="tag acc">Bewerkt door jou</span></sc-if></div>
+          </div>
+          <sc-if value="{{d.isTodo}}" hint-placeholder-val="{{true}}">
+            <div class="m-sec" style="animation-delay: 60ms">
+              <h4>Taak voor Asana</h4>
+              <div class="fgrid">
+                <label class="fld">Eigenaar<select value="{{d.f.owner}}" onChange="{{fh.owner}}"><option>Lucas Galle</option><option>Nina Verbeke</option><option>Jens Peeters</option><option>Amira El Idrissi</option><option>Thomas Wouters</option><option>Lotte Claes</option><option>Bram De Smet</option></select></label>
+                <label class="fld">Deadline<input type="date" value="{{d.f.due}}" onChange="{{fh.due}}"></label>
+                <label class="fld">Asana-project<select value="{{d.f.asanaProject}}" onChange="{{fh.asanaProject}}"><option>{{d.asanaMain}}</option><option>Interne taken – The AI Platform</option></select></label>
+                <label class="fld">Sectie<select value="{{d.f.section}}" onChange="{{fh.section}}"><option>Te doen</option><option>In uitvoering</option><option>Review</option></select></label>
+              </div>
+            </div>
+            <div class="m-sec" style="animation-delay: 110ms"><h4>Prioriteit</h4><div class="seg lg" role="group" aria-label="Prioriteit"><sc-for list="{{d.prioChips}}" as="c" hint-placeholder-count="4"><button class="{{c.cls}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}</button></sc-for></div></div>
+            <div class="m-sec" style="animation-delay: 160ms"><h4>Beschrijving</h4><label class="fld"><textarea value="{{d.f.desc}}" onChange="{{fh.desc}}" aria-label="Beschrijving" style="min-height: 120px"></textarea></label></div>
+            <div class="m-sec" style="animation-delay: 210ms">
+              <h4>Subtaken <span class="badge badge-soft">{{d.subLabel}}</span></h4>
+              <div class="subs"><sc-for list="{{d.subs}}" as="s" hint-placeholder-count="2"><div class="sub {{s.cls}}"><input type="checkbox" checked="{{s.done}}" onChange="{{s.toggle}}" aria-label="Subtaak afvinken"><span class="grow">{{s.text}}</span><button class="btn btn-ghost btn-sm btn-icon rm" onClick="{{s.remove}}" aria-label="Verwijderen"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div></sc-for></div>
+              <div class="addsub"><input value="{{d.f.newSub}}" onChange="{{fh.newSub}}" onKeyDown="{{d.subKey}}" placeholder="Subtaak toevoegen en Enter drukken" aria-label="Nieuwe subtaak"><button class="btn btn-sm" onClick="{{d.addSub}}">Toevoegen</button></div>
+            </div>
+            <div class="m-sec" style="animation-delay: 260ms"><h4>Labels</h4><div class="row g6 wrap"><sc-for list="{{d.tagChips}}" as="c" hint-placeholder-count="6"><button class="chip {{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}</button></sc-for></div></div>
+            <div class="m-sec" style="animation-delay: 310ms"><h4>Volgers</h4><div class="row g6 wrap"><sc-for list="{{d.followerChips}}" as="c" hint-placeholder-count="5"><button class="pchip {{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"><span class="avatar avatar-xs">{{c.ini}}</span>{{c.label}}</button></sc-for></div></div>
+            <div class="swrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17"></path></svg><div class="grow"><div style="font-weight: 500; font-size: 13.5px">{{d.ownerFirst}} verwittigen in Slack</div><div class="small muted">Kort bericht met de link naar de nieuwe taak.</div></div><button class="switch {{d.remindCls}}" role="switch" aria-checked="{{d.remindAria}}" aria-label="Eigenaar verwittigen" onClick="{{d.toggleRemind}}"><span></span></button></div>
+          </sc-if>
+          <sc-if value="{{d.isStep}}" hint-placeholder-val="{{false}}">
+            <div class="m-sec" style="animation-delay: 60ms">
+              <h4>Wat gebeurt er als je uitvoert?</h4>
+              <div class="seg lg" role="group" aria-label="Soort actie"><sc-for list="{{d.typeTabs}}" as="c" hint-placeholder-count="4"><button class="{{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{c.icon}}"></path></svg>{{c.label}}</button></sc-for></div>
+              <div class="preview">
+                <div class="preview-h"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{d.typeIcon}}"></path></svg><b style="color: var(--text); font-weight: 600">{{d.typeTitle}}</b><span class="grow"></span><span>Volledig aanpasbaar</span></div>
+                <div class="preview-b">
+                  <sc-if value="{{d.isMail}}" hint-placeholder-val="{{true}}">
+                    <div class="fgrid"><label class="fld">Aan<input value="{{d.f.aTo}}" onChange="{{fh.aTo}}"></label><label class="fld">Onderwerp<input value="{{d.f.aSubject}}" onChange="{{fh.aSubject}}"></label></div>
+                    <label class="fld">Bericht<textarea value="{{d.f.aBody}}" onChange="{{fh.aBody}}"></textarea></label>
+                    <div class="row g12 wrap"><span class="small muted">Bij uitvoeren</span><div class="seg" role="group" aria-label="Verzending"><sc-for list="{{d.deliveryTabs}}" as="c" hint-placeholder-count="2"><button class="{{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}}</button></sc-for></div></div>
+                  </sc-if>
+                  <sc-if value="{{d.isSlack}}" hint-placeholder-val="{{false}}">
+                    <label class="fld">Aan (persoon of kanaal)<input value="{{d.f.aTo}}" onChange="{{fh.aTo}}"></label>
+                    <label class="fld">Bericht<textarea value="{{d.f.aBody}}" onChange="{{fh.aBody}}"></textarea></label>
+                  </sc-if>
+                  <sc-if value="{{d.isInvite}}" hint-placeholder-val="{{false}}">
+                    <label class="fld">Titel van de meeting<input value="{{d.f.aSubject}}" onChange="{{fh.aSubject}}"></label>
+                    <div class="fgrid"><label class="fld">Datum<input type="date" value="{{d.f.aDate}}" onChange="{{fh.aDate}}"></label><label class="fld">Start<input type="time" value="{{d.f.aTime}}" onChange="{{fh.aTime}}"></label><label class="fld">Duur<select value="{{d.f.aDur}}" onChange="{{fh.aDur}}"><option value="15">15 min</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">1 uur</option></select></label></div>
+                    <div class="fld">Deelnemers</div>
+                    <div class="row g6 wrap" style="margin-top: -6px"><sc-for list="{{d.attendeeChips}}" as="c" hint-placeholder-count="5"><button class="pchip {{c.on}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}"><span class="avatar avatar-xs">{{c.ini}}</span>{{c.label}}</button></sc-for></div>
+                    <label class="fld">Agenda<textarea value="{{d.f.aBody}}" onChange="{{fh.aBody}}" style="min-height: 110px"></textarea></label>
+                    <div class="swrow" style="background: var(--surface)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h12v10H3zM15 10l6-3v10l-6-3"></path></svg><div class="grow" style="font-size: 13.5px">Videolink toevoegen</div><button class="switch {{d.meetCls}}" role="switch" aria-checked="{{d.meetAria}}" aria-label="Videolink toevoegen" onClick="{{d.toggleMeet}}"><span></span></button></div>
+                  </sc-if>
+                  <sc-if value="{{d.isDoc}}" hint-placeholder-val="{{false}}">
+                    <div class="fgrid"><label class="fld">Paginatitel<input value="{{d.f.aSubject}}" onChange="{{fh.aSubject}}"></label><label class="fld">Locatie in Notion<input value="{{d.f.aLoc}}" onChange="{{fh.aLoc}}"></label></div>
+                    <label class="fld">Inhoud<textarea value="{{d.f.aBody}}" onChange="{{fh.aBody}}"></textarea></label>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+            <div class="m-sec" style="animation-delay: 120ms">
+              <div class="swrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l2.8 2.8L16 9.8"></path></svg><div class="grow"><div style="font-weight: 500; font-size: 13.5px">Ook een opvolgtaak in Asana maken</div><div class="small muted">Zo zie je of er een antwoord komt.</div></div><button class="switch {{d.alsoCls}}" role="switch" aria-checked="{{d.alsoAria}}" aria-label="Opvolgtaak maken" onClick="{{d.toggleAlso}}"><span></span></button></div>
+              <sc-if value="{{d.alsoTask}}" hint-placeholder-val="{{false}}"><div class="fgrid" style="animation: reveal .35s both"><label class="fld">Eigenaar opvolgtaak<select value="{{d.f.taskOwner}}" onChange="{{fh.taskOwner}}"><option>Lucas Galle</option><option>Nina Verbeke</option><option>Jens Peeters</option><option>Amira El Idrissi</option><option>Thomas Wouters</option><option>Lotte Claes</option><option>Bram De Smet</option></select></label><label class="fld">Deadline opvolging<input type="date" value="{{d.f.taskDue}}" onChange="{{fh.taskDue}}"></label></div></sc-if>
+            </div>
+            <div class="m-sec" style="animation-delay: 180ms"><h4>Interne notitie</h4><label class="fld"><textarea value="{{d.f.desc}}" onChange="{{fh.desc}}" placeholder="Enkel voor jezelf zichtbaar" aria-label="Interne notitie" style="min-height: 80px"></textarea></label></div>
+          </sc-if>
+        </div>
+        <aside class="m-side" aria-label="Context">
+          <div class="side-card">
+            <h5>Waarom dit voorstel?</h5>
+            <ul class="why"><sc-for list="{{d.why}}" as="w" hint-placeholder-count="2"><li>{{w}}</li></sc-for></ul>
+            <div class="row g8 small muted" style="padding-top: 6px; border-top: 1px dashed var(--border-strong)">Zekerheid<span class="grow"></span><span class="conf" aria-hidden="true"><sc-for list="{{d.confBars}}" as="c"><span class="{{c.cls}}"></span></sc-for></span><b style="color: var(--text); font-weight: 500">{{d.conf}}</b></div>
+          </div>
+          <div class="side-card">
+            <h5><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="{{d.src.icon}}"></path></svg>Bron · {{d.src.type}}</h5>
+            <div style="font-weight: 500; font-size: 13.5px">{{d.src.label}}<div class="small muted" style="font-weight: 400">{{d.src.meta}}</div></div>
+            <div class="excerpt">{{d.excerpt}}</div>
+            <button class="btn btn-sm" style="align-self: flex-start" onClick="{{d.src.open}}">Origineel openen<svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></button>
+          </div>
+          <div class="side-card">
+            <h5>Project</h5>
+            <div class="row g8"><b class="grow" style="font-weight: 600">{{d.projectName}}</b><span class="hp {{d.health}}" style="font-size: 11.5px"><span class="dot {{d.health}}" aria-hidden="true"></span>{{d.healthLabel}}</span></div>
+            <div class="row g8 small muted"><span class="grow">Fase · {{d.phaseName}}</span><span class="mono">{{d.progress}}%</span></div>
+            <div class="bar acc"><span style="width: {{d.progress}}%"></span></div>
+          </div>
+          <div class="side-card"><h5>Geschiedenis</h5><div class="hist"><sc-for list="{{d.hist}}" as="h" hint-placeholder-count="2"><div><i class="{{h.cls}}"></i><span class="grow">{{h.text}}<br><span class="muted">{{h.meta}}</span></span></div></sc-for></div></div>
+        </aside>
+      </div>
+      <div class="m-foot">
+        <sc-if value="{{d.rejectOpen}}" hint-placeholder-val="{{false}}"><div class="reasons"><span class="small muted" style="margin-right: 4px">Waarom? De agent leert hiervan:</span><sc-for list="{{d.reasons}}" as="r" hint-placeholder-count="4"><button class="chip" onClick="{{r.pick}}">{{r.label}}</button></sc-for></div></sc-if>
+        <sc-if value="{{d.snoozeOpen}}" hint-placeholder-val="{{false}}"><div class="reasons"><span class="small muted" style="margin-right: 4px">Opnieuw tonen:</span><sc-for list="{{d.snoozes}}" as="r" hint-placeholder-count="3"><button class="chip" onClick="{{r.pick}}">{{r.label}}</button></sc-for></div></sc-if>
+        <button class="btn btn-ghost btn-dng" onClick="{{d.toggleReject}}">{{d.rejectLabel}}</button>
+        <button class="btn btn-ghost" onClick="{{d.toggleSnooze}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2"></path></svg>Later</button>
+        <span class="grow"></span>
+        <button class="btn" onClick="{{d.save}}">Bewaren</button>
+        <sc-if value="{{d.isStep}}" hint-placeholder-val="{{false}}"><button class="btn" onClick="{{d.toAsana}}">Enkel naar Asana</button></sc-if>
+        <button class="btn btn-primary" onClick="{{d.approve}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{{d.primaryLabel}}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{hasSlack}}" hint-placeholder-val="{{false}}">
+  <div class="overlay" onClick="{{closeSlack}}">
+    <div class="dialog" role="dialog" aria-modal="true" aria-label="Slack-bericht nalezen" onClick="{{stop}}">
+      <div class="panel-h" style="padding: 20px 22px 10px"><span class="hdr-ic acc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17"></path></svg></span><h2 class="grow">Statusvraag nalezen</h2><button class="btn btn-ghost btn-icon" onClick="{{closeSlack}}" aria-label="Sluiten"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+      <div class="panel-b" style="display: flex; flex-direction: column; gap: 14px">
+        <div class="row g8 wrap small"><span class="muted">Aan</span><span class="tag acc">@{{slack.name}}</span><span class="muted">· direct bericht</span></div>
+        <label class="fld">Opgesteld door de agent, pas aan waar nodig<textarea value="{{slack.text}}" onChange="{{onSlackText}}"></textarea></label>
+        <div class="small muted">Er wordt niets verstuurd zonder jouw klik.</div>
+      </div>
+      <div class="row g8" style="justify-content: flex-end; padding: 0 22px 22px"><button class="btn btn-ghost" onClick="{{closeSlack}}">Annuleren</button><button class="btn btn-primary" onClick="{{sendSlack}}"><svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"></path></svg>Versturen</button></div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+  <div class="toast" role="status">
+    <span class="okc" style="width: 24px; height: 24px"><svg class="ic" style="width: 12px; height: 12px; stroke-width: 2.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+    <span>{{toastText}}</span>
+    <sc-if value="{{toastUndo}}" hint-placeholder-val="{{false}}"><button class="link" onClick="{{onToastUndo}}">Ongedaan maken</button></sc-if>
+  </div>
+</sc-if>
+</sc-if>
+</div>
+</template>
+<div id="root"></div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
