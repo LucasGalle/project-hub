@@ -1,6 +1,6 @@
 {
   "project": "Project Hub",
-  "updated": "2026-10-18",
+  "updated": "2026-10-19",
   "phase": {
     "id": "M2",
     "name": "Skelet met demodata",
@@ -163,6 +163,10 @@
         "monthly": 0
       },
       {
+        "name": "Cloudflare Worker project-hub-app (app)",
+        "monthly": 0
+      },
+      {
         "name": "GitHub-repo",
         "monthly": 0
       },
@@ -212,6 +216,10 @@
     {
       "date": "2026-10-18",
       "text": "Dossier opgezet: governance, flows, architectuur, stackopties, roadmap"
+    },
+    {
+      "date": "2026-10-19",
+      "text": "M2a afgerond: schermen van het design live op project-hub-app.lucas-galle1.workers.dev, bevestigd door Lucas"
     }
   ],
   "stack": {

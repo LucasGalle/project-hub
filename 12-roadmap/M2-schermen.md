@@ -1,6 +1,6 @@
 # M2 — Skelet met demodata
 
-**Status:** IN_PROGRESS · **Inspanning:** M · **Hangt af van:** M1 (DONE), PH-DEC-016 (login zelf bouwen), PH-DEC-017 (getrouwe kopie)
+**Status:** DONE (M2a, 2026-10-19) · **Inspanning:** M · **Hangt af van:** M1 (DONE), PH-DEC-016 (login zelf bouwen), PH-DEC-017 (getrouwe kopie)
 
 Opgesplitst op vraag van Lucas (2026-10-18):
 
@@ -26,3 +26,10 @@ Om een getrouwe kopie te garanderen, wordt niets opnieuw getekend: stijl (CSS), 
 ## Afwijkingen van het prototype
 
 Geen. Wat het prototype doet met demodata (beslissen, ongedaan maken, sync) doet de app ook, nog zonder echte opslag of bronnen; dat komt in M3 en M4.
+
+## Bewijs (M2a)
+
+- PR #1, merge commit dcd96eb.
+- Live: https://project-hub-app.lucas-galle1.workers.dev (Worker `project-hub-app`, rootmap `app`, $0).
+- AC-001..004: Playwright-test `app/tests/screens.test.cjs` groen; schermafbeeldingen in de projectbestanden (`app-schermen/`).
+- AC-005 en getrouwheid: op 2026-10-19 door Lucas bevestigd ("Yes het klopt!").

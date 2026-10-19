@@ -6,8 +6,8 @@
 
 - Flows en architectuur goedgekeurd door Lucas (PH-DEC-008). Stack: Cloudflare alles-in-één (PH-DEC-006).
 - M1 afgerond: voortgangsdashboard live op https://project-hub.lucas-galle1.workers.dev (bevestigd door Lucas).
-- M2a gemerged (PR #1, commit dcd96eb): alle schermen van het design staan als app in `app/` (getrouwe kopie, PH-DEC-017); wacht op de koppeling van Worker `project-hub-app` door Lucas.
-- M2b daarna: zelfgebouwde login (PH-DEC-016).
+- M2a DONE: alle schermen van het design staan live op https://project-hub-app.lucas-galle1.workers.dev (PR #1, commit dcd96eb), door Lucas bevestigd als getrouwe kopie (PH-DEC-017).
+- M2b bezig: zelfgebouwde login (PH-DEC-016); eerst de methode en kostprijs uitwerken in PH-FLOW-009.
 
 ## Wacht op Lucas
 
@@ -33,9 +33,11 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 | Codeproef Next.js | eerste omzetting van het prototype, geparkeerd buiten de repo | $0 | niet in gebruik; wordt pas herbekeken na de stackkeuze |
 | GitHub-repo `LucasGalle/project-hub` | dit dossier | $0 | — |
 | Cloudflare Worker `project-hub` | voortgangsdashboard | $0 (gratis plan) | — |
+| Cloudflare Worker `project-hub-app` | de app (schermen, M2a) | $0 (gratis plan) | — |
 
 ## Laatste wijzigingen
 
+- 2026-10-19 — M2a afgerond: app live op Worker `project-hub-app`, door Lucas bevestigd.
 - 2026-10-19 — PR #1 (M2a, schermen) gemerged op vraag van Lucas.
 - 2026-10-18 — M2a: schermen van het design als app gebouwd en getest; PH-DEC-016 (login zelf bouwen) en PH-DEC-013 (code in `app/`) vastgelegd.
 - 2026-10-18 — M1 afgerond; dashboard live en bevestigd.
