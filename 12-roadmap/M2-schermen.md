@@ -50,7 +50,7 @@ Geen. Wat het prototype doet met demodata (beslissen, ongedaan maken, sync) doet
 
 ### Loginscherm (PH-DEC-017)
 
-Het prototype heeft geen loginscherm. Het scherm wordt gebouwd met uitsluitend de bestaande stijl van het design (achtergrond met bollen, `panel`, `brand-mark`, `btn btn-primary btn-lg`, lettertypes en kleuren uit `styles.css`), met een minimaal eigen stukje CSS voor het centreren. Lucas keurt het goed via een schermafbeelding vóór het samenvoegen.
+Het prototype heeft geen loginscherm. Het scherm wordt gebouwd met uitsluitend de bestaande stijl van het design (achtergrond met bollen, `panel`, `brand-mark`, `btn btn-primary btn-lg`, lettertypes en kleuren uit `styles.css`), met een minimaal eigen stukje CSS voor het centreren. Lucas keurde het goed via schermafbeeldingen op 2026-10-19.
 
 ### Wat Lucas instelt (eenmalig, gratis)
 
@@ -78,5 +78,5 @@ Geheimen komen nooit in de repo (die is publiek) en nooit in de chat.
 
 - Gebouwd in de branch `m2b-google-login`: `app/src/worker.js`, `app/public/login.html`, `app/public/login.css`, `app/wrangler.jsonc` (script + `run_worker_first`).
 - AC-006 t/m AC-011: `node --test app/tests/auth.test.mjs`, 15 tests groen; ook lokaal nagekeken in de echte Cloudflare-runtime (`wrangler dev`): zonder sessie 401 + loginscherm, met geldige sessie de app.
-- AC-012: schermafbeeldingen `app-schermen/login-desktop.png`, `login-gsm.png`, `login-melding.png` in de projectbestanden; wacht op akkoord van Lucas.
+- AC-012: schermafbeeldingen `app-schermen/login-desktop.png`, `login-gsm.png`, `login-melding.png` in de projectbestanden; goedgekeurd door Lucas op 2026-10-19 ("Goedgekeurd").
 - Nog open: Google- en Cloudflare-instellingen door Lucas, daarna een echte login op het live adres.
