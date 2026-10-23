@@ -1,6 +1,6 @@
 {
   "project": "Project Hub",
-  "updated": "2026-10-19",
+  "updated": "2026-10-23",
   "phase": {
     "id": "M2",
     "name": "Skelet met demodata",
@@ -72,6 +72,10 @@
     }
   ],
   "decisions_waiting": [
+    {
+      "id": "PH-DEC-019",
+      "question": "Wat gebeurt er met de eigen bouw na de overdracht?"
+    },
     {
       "id": "PH-DEC-018",
       "question": "Hoe log je in?"
@@ -185,6 +189,10 @@
     "pro_plan_usage_pct_manual": null
   },
   "log": [
+    {
+      "date": "2026-10-23",
+      "text": "Overdrachtspakket voor het AI-platform gemaakt (app in één HTML-bestand, design, broncode, dossier, prompt); eigen bouw wacht op PH-DEC-019"
+    },
     {
       "date": "2026-10-19",
       "text": "M2a gemerged (PR #1): schermen van het design staan in main; wacht op Worker project-hub-app"

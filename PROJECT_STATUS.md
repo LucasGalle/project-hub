@@ -1,6 +1,6 @@
 # Project status
 
-**Last updated:** 2026-10-19 · **Fase:** M2 — skelet met demodata
+**Last updated:** 2026-10-23 · **Fase:** M2 — skelet met demodata
 
 ## Nu
 
@@ -11,8 +11,9 @@
 
 ## Wacht op Lucas
 
-1. **PH-DEC-007** — voor wie is dit (alleen Lucas, team, product)?
-2. **PH-DEC-012** — wat het dashboard over de Pro-credits toont
+1. **PH-DEC-019** — eigen bouw stoppen, pauzeren of verderzetten na de overdracht aan het AI-platform
+2. **PH-DEC-007** — voor wie is dit (alleen Lucas, team, product)?
+3. **PH-DEC-012** — wat het dashboard over de Pro-credits toont
 
 Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
@@ -37,6 +38,7 @@ Overige open punten: zie `11-decisions/DECISION_LOG.md`.
 
 ## Laatste wijzigingen
 
+- 2026-10-23 — Overdrachtspakket voor het AI-platform gemaakt op vraag van Lucas: app in één HTML-bestand, schermafbeeldingen, origineel design, broncode, dossier en een begeleidende prompt (projectmap `overdracht/`, zonder geheimen).
 - 2026-10-19 — M2a afgerond: app live op Worker `project-hub-app`, door Lucas bevestigd.
 - 2026-10-19 — PR #1 (M2a, schermen) gemerged op vraag van Lucas.
 - 2026-10-18 — M2a: schermen van het design als app gebouwd en getest; PH-DEC-016 (login zelf bouwen) en PH-DEC-013 (code in `app/`) vastgelegd.
